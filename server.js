@@ -1,7 +1,8 @@
 require('dotenv').config()
 const express = require('express'),
     hbs = require('express-handlebars'),
-    bodyParser = require('body-parser')
+    bodyParser = require('body-parser'),
+    models = require('./models/models')
 
 const app = express()
 
@@ -12,16 +13,24 @@ const PORT = process.env.PORT || 8080
 app.use(express.static(__dirname + '/public'))
 
 // Use handlebars
-app.engine('handlebars', hbs({ defaultLayout: 'main' }))
+app.engine('handlebars', hbs({
+    defaultLayout: 'main'
+}))
 app.set('view engine', 'handlebars')
 
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded({
+    extended: true
+}))
 app.use(bodyParser.json())
 
 // Routes
-const routes = require('./controllers/index')
+const indexRoutes = require('./controllers/index')
+const indexUsers = require('./controllers/users')
+const apiRoutes = require('./controllers/api')
 
-app.use(routes)
+app.use(indexRoutes)
+app.use(indexUsers)
+app.use(apiRoutes)
 
 // Start server
 app.listen(PORT, () => {
