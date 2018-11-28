@@ -13,22 +13,27 @@
         </div>
     </nav>
 
-    {{!-- Container --}}
+    {{!-- Container Top--}}
 
-    <div class="container" >
+    <div class="jumbotron container-fluid">
+        <div class="container">
+            <div class="typewriter">
+                <h1>Codebusters</h1>
+            </div>
+            <h3>Compete with other developers ... Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ultricies
+                sagittis ipsum et consectetur. Donec semper risus sit amet pellentesque porta. Nullam fringilla magna
+                sem, quis mollis urna pulvinar et. </h3>
 
-        {{!-- Title Effect--}}
-        <div class="typewriter"><h1>CodeBusters</h1></div>
-        
-        {{!-- Button --}}
-        <div>
-            <h3>Compete with other developers ... Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ultricies sagittis ipsum et consectetur. Donec semper risus sit amet pellentesque porta. Nullam fringilla magna sem, quis mollis urna pulvinar et. </h3>
-            <a href="/challenge1"><button class="btn">Code Challenge</button></a>
+            <a href="/"><button class="btn btn-primary btn-lg">Home Page</button></a>
+            <a href="/challenge1"><button class="btn btn-primary btn-lg">Code Challenge</button></a>
         </div>
-       
-        {{!-- Leaderboard --}}
-        <div>
-        <table class="table">
+    </div>
+
+
+    {{!-- Leaderboard Container--}}
+
+    <div class="container panel">
+        <table class="table table-bordered">
             <thead>
                 <tr>
                     <th scope="col">Ranking #</th>
@@ -57,9 +62,7 @@
                 </tr>
             </tbody>
         </table>
-        </div>
+    </div>
     </div>
 
 </body>
-
-</html>

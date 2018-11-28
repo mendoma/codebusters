@@ -1,16 +1,26 @@
-<h1>Challenge #3</h1>
+<body id="chall">
 
-<a href="/"><button>Home Page</button></a>
-<a href="/challenge4"><button>Next Challenge</button></a>
+    <div class="jumbotron container-fluid">
+        <div class="container">
+            <div class="typewriter">
+                <h1>Challenge #3</h1>
+            </div>
+            <a href="/"><button class="btn btn-primary btn-lg">Home Page</button></a>
+            <a href="/challenge4"><button class="btn btn-primary btn-lg">Next Challenge</button></a>
+        </div>
+    </div>
 
-<form action="/api/testcode" method="POST">
-    <p>
-        Write a function to reverse the following string: NodeJS
-    </p>
-    <div>
-        <textarea name="code" id="code-val" cols="100" rows="10"></textarea>
+    <div class="container">
+        <form action="/api/testcode" method="POST">
+            <h1>
+                Write a function to reverse the following string: "NodeJS"
+            </h1>
+
+            <textarea name="code" id="code-val" cols="100" rows="10" class="form-control form-rounded"></textarea>
+            <br />
+
+            <input type="submit" id="code" value="Submit" class="form-control form-rounded">
+
+        </form>
     </div>
-    <div>
-        <input type="submit" id="code" value="Submit">
-    </div>
-</form>
+</body>
