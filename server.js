@@ -1,7 +1,7 @@
 require('dotenv').config()
 const express = require('express'),
     session = require('express-session'),
-    cookieParser = require('cookie-parser'),
+    // cookieParser = require('cookie-parser'),
     hbs = require('express-handlebars'),
     bodyParser = require('body-parser'),
     logger = require('morgan'),
@@ -28,7 +28,7 @@ app.engine('handlebars', hbs({
 }))
 app.set('view engine', 'handlebars')
 app.use(flash())
-app.use(cookieParser())
+// app.use(cookieParser())
 app.use(bodyParser.urlencoded({
     extended: true
 }))

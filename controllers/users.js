@@ -1,6 +1,7 @@
 const express = require('express'),
     passport = require('passport'),
     bcrypt = require('bcrypt'),
+    jwt = require('jsonwebtoken'),
     middleware = require('../middleware/authentication'),
     {
         User,
@@ -10,8 +11,6 @@ const express = require('express'),
 
 // GET login page
 router.get('/users/login', (req, res) => {
-    console.log(req.user)
-    console.log(req.isAuthenticated())
     res.render('login')
 })
 
@@ -78,15 +77,18 @@ router.post('/users/login', (req, res, next) => {
         if (user) {
             bcrypt.compare(req.body.password, user.password)
                 .then(data => {
-                    const user_id = user.id
-
+                    console.log('data:', data)
                     if (data) {
-                        console.log('user id:', user_id)
                         console.log('user logged in')
-                        req.login(user_id, err => {
-                            console.log(err)
-                            req.flash('success', 'You have created your account successfully')
+                        const token = jwt.sign({
+                            id: user.username
+                        }, process.env.secret, {
+                            expiresIn: 86400,
                         })
+                        console.log('token:', token)
+                        if (token) {
+                            console.log(res.headers)
+                        }
                     } else {
                         console.log('passwords do not match')
                         return next()
@@ -95,7 +97,6 @@ router.post('/users/login', (req, res, next) => {
                 .catch(err => {
                     return console.log(err)
                 })
-            res.redirect('/')
         }
     })(req, res, next)
 })

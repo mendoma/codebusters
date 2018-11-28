@@ -1,12 +1,28 @@
-const middleware = {}
+const jwt = require('jsonwebtoken'),
+	middleware = {}
 
 // Require login
 middleware.isLoggedIn = (req, res, next) => {
-	if (req.isAuthenticated()) {
-		return next()
+	const token = req.headers
+	console.log(token)
+	if (token) {
+		jwt.verify(token, process.env.secret, (err, decod) => {
+			if (err) {
+				res.status(403).json({
+					message: "Wrong Token"
+				})
+			} else {
+				req.decoded = decod;
+				next()
+			}
+		})
+	} else {
+		req.flash('error', 'You must login to do that')
+		res.status(403).json({
+			message: "No Token"
+		})
 	}
-	req.flash('error', 'You must login to do that')
-	res.redirect('/users/login')
+
 }
 
 middleware.destroySession = (req, res, next) => {
