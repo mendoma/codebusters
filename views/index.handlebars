@@ -1,8 +1,65 @@
-<h1>Home Page</h1>
+<body id="home">
 
-<a href="/challenge1"><button>Code Challenge</button></a>
+    {{!-- NavBar --}}
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+            </div>
 
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            </ul>
+        </div>
+    </nav>
 
+    {{!-- Container --}}
 
+    <div class="container" >
 
+        {{!-- Title Effect--}}
+        <div class="typewriter"><h1>CodeBusters</h1></div>
+        
+        {{!-- Button --}}
+        <div>
+            <h3>Compete with other developers ... Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ultricies sagittis ipsum et consectetur. Donec semper risus sit amet pellentesque porta. Nullam fringilla magna sem, quis mollis urna pulvinar et. </h3>
+            <a href="/challenge1"><button class="btn">Code Challenge</button></a>
+        </div>
+       
+        {{!-- Leaderboard --}}
+        <div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Ranking #</th>
+                    <th scope="col">Player Name</th>
+                    <th scope="col">Player Age</th>
+                    <th scope="col">Connect</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>34</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>33</td>
+                    <td>@fat</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td colspan="2">Larry the Bird</td>
+                    <td>@twitter</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
 
+</body>
+
+</html>
