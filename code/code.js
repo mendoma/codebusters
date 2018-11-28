@@ -24,8 +24,8 @@ module.exports = {
 
         const totalSum = (num + 1) * (num + 2) / 2
         const numArrSum = numArr.reduce((a, b) => a + b, 0)
-        const num = totalSum - numArrSum
+        const answer = totalSum - numArrSum
 
-        return num
+        return answer
     }
 }
