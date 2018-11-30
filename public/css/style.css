@@ -2,7 +2,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-}
+    font-family: Lucida Sans Typewriter,Lucida Console,monaco,Bitstream Vera Sans Mono,monospace; }
 
 .content {
     flex: 1 0 auto;
@@ -26,12 +26,13 @@ body {
     background-size: cover;
     background-position: center;
     height: 100%;
-    color: red;
+    color:black;
+    
 }
 
 .typewriter h1 {
     overflow: hidden; /* Ensures the content is not revealed until the animation */
-    border-right: .15em solid red; /* The typwriter cursor */
+    border-right: .15em solid black; /* The typwriter cursor */
     white-space: nowrap; /* Keeps the content on a single line */
     margin: 0 auto; /* Gives that scrolling effect as the typing happens */
     letter-spacing: .10em; /* Adjust as needed */
@@ -59,14 +60,16 @@ body {
     
 }
 
-#chall {
+.chall {
     background-image: url("img3.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     height: 100%;
-    color: red;
+    color:red;
+    font-family: Lucida Sans Typewriter,Lucida Console,monaco,Bitstream Vera Sans Mono,monospace; 
 }
+
 
 .boxes {
     margin: 0 auto;
@@ -74,9 +77,11 @@ body {
 
 }
 
+
 .jumbotron {
-    opacity: 0.6;
+    opacity: 0.65;
     padding: 2% 5%;
+    text-align: center;
 }
 
 .btn-primary {
