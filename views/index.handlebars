@@ -1,8 +1,155 @@
-<h1>Home Page</h1>
+<body id="home">
 
-<a href="/challenge1"><button>Code Challenge</button></a>
+    {{!-- NavBar --}}
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+        </div>
+
+            <ul class="nav navbar-nav navbar-right">
+            {{!--  Icons --}}
+                {{!-- Login --}}
+                <button type="button" class="btn" data-toggle="modal" data-target="#myModal">
+                    <a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+                </button>
+                {{!-- Logout --}}
+                <button type="button" class="btn">
+                    <a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+                </button>
+                {{!-- Sign-Up --}}
+                <button type="button" class="btn" data-toggle="modal" data-target="#secModal">
+                    <a href="#"><span class="glyphicon glyphicon-user"></span> Sign-Up</a>
+                </button>
+            </ul>
+
+
+            {{!-- Modal Pop-Up for Login Button --}}
+            <div class="modal" id="myModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <!-- Modal Header for Login Button-->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Login</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <!-- Modal body for Login Button -->
+                        <div class="modal-body">
+                            <form action="">
+                                <div class="form-group">
+                                    <label for="email">Email:</label>
+                                    <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="pwd">Password:</label>
+                                    <input type="password" class="form-control" id="pwd" placeholder="Enter password"
+                                        name="pswd">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+
+                        <!-- Modal footer for for Login Button-->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+  
+            {{!-- Modal Pop-Up for Sign-Up Button --}}
+            <div class="modal" id="secModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                     <!-- Modal Header for Sign-Up Button-->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Sign-Up</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <!-- Modal body for Sign-Up Button -->
+                        <div class="modal-body">
+
+                            <form action="/action_page.php">
+                                <div class="form-group">
+                                    <label for="email">Email:</label>
+                                    <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Player Name:</label>
+                                    <input type="email" class="form-control" id="email" placeholder="Enter player name"
+                                        name="email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="pwd">Password:</label>
+                                    <input type="password" class="form-control" id="pwd" placeholder="Enter password"
+                                        name="pswd">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+    </nav>
 
 
 
+    {{!-- Header jumbotron--}}
+    <div class="jumbotron container-fluid">
+        <div class="container">
+            <div class="typewriter">
+                <h1>Codebusters</h1>
+            </div>
+            <h3>Compete with other developers ... Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
+                ultricies
+                sagittis ipsum et consectetur. Donec semper risus sit amet pellentesque porta. Nullam fringilla
+                magna
+                sem, quis mollis urna pulvinar et. </h3>
+
+            <a href="/"><button class="btn btn-primary btn-lg">Home Page</button></a>
+            <a href="/challenge1"><button class="btn btn-primary btn-lg">Code Challenge</button></a>
+        </div>
+    </div>
 
 
+    {{!-- Leaderboard Container--}}
+
+    <div class="container panel">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Ranking #</th>
+                    <th scope="col">Player Name</th>
+                    <th scope="col">Player Age</th>
+                    <th scope="col">Connect</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>34</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>33</td>
+                    <td>@fat</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td colspan="2">Larry the Bird</td>
+                    <td>@twitter</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+
+</body>

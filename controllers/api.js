@@ -1,5 +1,5 @@
 const express = require('express')
-const code = require('../models/code')
+const code = require('../code/code')
 const vm = require('vm')
 
 const router = express.Router()
