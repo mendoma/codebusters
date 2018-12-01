@@ -64,18 +64,10 @@ router.post('/users/register', (req, res) => {
 })
 
 // Login
-// router.post('/users/login', passport.authenticate('local', {
-//     successMessage: true,
-//     successRedirect: '/users/home',
-//     failureMessage: true,
-//     failureRedirect: '/users/login'
-// }))
 router.post('/users/login', function (req, res, next) {
-
     passport.authenticate('local', {
             failureFlash: true,
             failureRedirect: '/users/login',
-            session: false
         }, (err, user, info) => {
             console.log('new strategy 1st', err)
             if (err || !user) {
@@ -84,9 +76,8 @@ router.post('/users/login', function (req, res, next) {
                     user: user
                 })
             }
-            req.login(user, {
-                session: false
-            }, (err) => {
+            console.log('user in login route:', user.username)
+            req.login(user, (err) => {
                 console.log('new login strategy', user.username)
                 if (err) return res.send(err)
                 bcrypt.compare(req.body.password, user.password)
@@ -94,15 +85,7 @@ router.post('/users/login', function (req, res, next) {
                         if (!auth) {
                             return res.redirect('/users/login')
                         }
-                        const token = jwt.sign({
-                            id: user.id,
-                            username: user.username
-                        }, process.env.secret, {
-                            expiresIn: 1200
-                        })
-                console.log('token created:', token)
-                res.cookie('Authorization', token).redirect('/users/home')
-            })
+                    })
             })
         })
         (req, res)
