@@ -29,6 +29,30 @@ router.get('/challenge4', (req, res) => {
     res.render('challenge4')
 })
 
+router.get('/challenge5', (req, res) => {
+    res.render('challenge5')
+ })
+ 
+ router.get('/challenge6', (req, res) => {
+    res.render('challenge6')
+ })
+ 
+ router.get('/challenge7', (req, res) => {
+    res.render('challenge7')
+ })
+ 
+ router.get('/challenge8', (req, res) => {
+    res.render('challenge8')
+ })
+ 
+ router.get('/challenge9', (req, res) => {
+    res.render('challenge9')
+ })
+ 
+ router.get('/challenge10', (req, res) => {
+    res.render('challenge10')
+ })
+
 // Catch all
 router.get('*', (req, res) => {
     res.send('Ooooops nothing to see here!')
