@@ -16,6 +16,7 @@ router.get('/users/login', (req, res) => {
 
 // GET user home page
 router.get('/users/home', middleware.isLoggedIn, (req, res) => {
+    console.log(req.isAuthenticated)
     res.render('home')
 })
 
@@ -30,7 +31,6 @@ router.post('/users/register', (req, res) => {
         username: req.body.username,
         password: req.body.password
     }
-
     User.findOne({
             where: {
                 username: data.username
@@ -64,41 +64,48 @@ router.post('/users/register', (req, res) => {
 })
 
 // Login
-router.post('/users/login', (req, res, next) => {
-    passport.authenticate('local', (err, user, info) => {
-        if (err) {
-            return res.json(err)
-        }
-        if (!user) {
-            console.log('bad username')
-            return res.status(400).json('bad username')
-        }
+// router.post('/users/login', passport.authenticate('local', {
+//     successMessage: true,
+//     successRedirect: '/users/home',
+//     failureMessage: true,
+//     failureRedirect: '/users/login'
+// }))
+router.post('/users/login', function (req, res, next) {
 
-        if (user) {
-            bcrypt.compare(req.body.password, user.password)
-                .then(data => {
-                    console.log('data:', data)
-                    if (data) {
-                        console.log('user logged in')
-                        const token = jwt.sign({
-                            id: user.username
-                        }, process.env.secret, {
-                            expiresIn: 86400,
-                        })
-                        console.log('token:', token)
-                        if (token) {
-                            console.log(res.headers)
+    passport.authenticate('local', {
+            failureFlash: true,
+            failureRedirect: '/users/login',
+            session: false
+        }, (err, user, info) => {
+            console.log('new strategy 1st', err)
+            if (err || !user) {
+                return res.status(400).json({
+                    message: info ? info.message : 'Login failed',
+                    user: user
+                })
+            }
+            req.login(user, {
+                session: false
+            }, (err) => {
+                console.log('new login strategy', user.username)
+                if (err) return res.send(err)
+                bcrypt.compare(req.body.password, user.password)
+                    .then(auth => {
+                        if (!auth) {
+                            return res.redirect('/users/login')
                         }
-                    } else {
-                        console.log('passwords do not match')
-                        return next()
-                    }
-                })
-                .catch(err => {
-                    return console.log(err)
-                })
-        }
-    })(req, res, next)
+                        const token = jwt.sign({
+                            id: user.id,
+                            username: user.username
+                        }, process.env.secret, {
+                            expiresIn: 1200
+                        })
+                console.log('token created:', token)
+                res.cookie('Authorization', token).redirect('/users/home')
+            })
+            })
+        })
+        (req, res)
 })
 
 // Logout session

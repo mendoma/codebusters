@@ -1,17 +1,13 @@
 require('dotenv').config()
+require('./config/passport')
 const express = require('express'),
     session = require('express-session'),
-    // cookieParser = require('cookie-parser'),
+    cookieParser = require('cookie-parser'),
     hbs = require('express-handlebars'),
     bodyParser = require('body-parser'),
     logger = require('morgan'),
     flash = require('connect-flash'),
-    passport = require('passport'),
-    LocalStrategy = require('passport-local').Strategy,
-    {
-        User,
-        Game
-    } = require('./models/index')
+    passport = require('passport')
 
 const app = express()
 
@@ -28,7 +24,7 @@ app.engine('handlebars', hbs({
 }))
 app.set('view engine', 'handlebars')
 app.use(flash())
-// app.use(cookieParser())
+app.use(cookieParser())
 app.use(bodyParser.urlencoded({
     extended: true
 }))
@@ -38,45 +34,11 @@ app.use(session({
     maxAge: 6000,
     resave: false,
     saveUninitialized: false,
-    // cookie: { secure: true }
 }))
 
 // Passport
 app.use(passport.initialize())
-app.use(passport.session())
-passport.serializeUser((user_id, done) => {
-    console.log('serialize:', user_id)
-    done(null, user_id)
-})
-passport.deserializeUser((user_id, done) => {
-    // console.log('deserialize:', user)
-    done(null, user_id)
-})
-passport.use(new LocalStrategy(
-    (username, password, done) => {
-        User.findOne({
-            where: {
-                username: username
-            }
-        })
-        .then(user => {
-            if (!user) {
-                return done(null, false, {
-                    message: 'Authentication failed'
-                })
-            }
-            if (!user.password) {
-                return done(null, false, {
-                    message: 'Authentication failed'
-                })
-            }
-            return done(null, user);
-        })
-        .catch(err => {
-            console.log('error', err)
-        })
-    }
-))
+// app.use(passport.session())
 
 // Globals
 app.use((req, res, next) => {

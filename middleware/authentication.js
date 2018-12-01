@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken'),
 
 // Require login
 middleware.isLoggedIn = (req, res, next) => {
-	const token = req.headers
+	const token = req.cookies.Authorization
 	console.log(token)
 	if (token) {
 		jwt.verify(token, process.env.secret, (err, decod) => {
