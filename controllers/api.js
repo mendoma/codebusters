@@ -5,7 +5,7 @@ const vm = require('vm')
 const router = express.Router()
 
 // Test code
-router.post('/api/code/:challenge', (req, res) => {
+router.post('/api/code', (req, res) => {
     let challenge = req.params
     
     const input = req.body.code
