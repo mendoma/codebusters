@@ -1,16 +1,25 @@
-<h1>Challenge #4</h1>
+<body class="chall">
 
-<a href="/"><button>Home Page</button></a>
+    <div class="jumbotron container-fluid">
+        <div class="container">
+            <div class="typewriter"><h1>Challenge #4</h1></div>
+            <a href="/"><button class="btn btn-primary btn-lg">Home Page</button></a>
+            {{!-- <a href="/challenge2"><button class="btn btn-primary btn-lg">Next Challenge</button></a> --}}
+        </div>
+    </div>
 
+
+<div class="container">
 <form action="/api/testcode" method="POST">
-    <p>
+    <h1>
         Write a function that will find the missing number in the array: 
         [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 19, 20]
-    </p>
-    <div>
-        <textarea name="code" id="code-val" cols="100" rows="10"></textarea>
-    </div>
-    <div>
-        <input type="submit" id="code" value="Submit">
-    </div>
+    </h1>
+  
+        <textarea name="code" id="code-val" cols="100" rows="10" class="form-control form-rounded"></textarea>
+    <br />
+        <input type="submit" id="code" value="Submit" class="form-control form-rounded">
+    
 </form>
+</div>
+</body>
