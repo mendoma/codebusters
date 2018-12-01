@@ -39,6 +39,7 @@ body {
     animation: 
       typing 3.5s steps(40, end),
       blink-caret .75s step-end infinite;
+    color: red;
   }
   
   /* The typing effect */
@@ -66,7 +67,7 @@ body {
     background-size: cover;
     background-position: center;
     height: 100%;
-    color:red;
+    color: yellow;
     font-family: Lucida Sans Typewriter,Lucida Console,monaco,Bitstream Vera Sans Mono,monospace; 
 }
 
