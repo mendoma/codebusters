@@ -1,28 +1,26 @@
 <body class="chall">
 
-    <div class="jumbotron container-fluid">
+    <div class="jumbotron container panel">
         <div class="container">
-            <div class="typewriter"><h1>Challenge #2</h1></div>
+            <div class="typewriter">
+                <h1>Challenge #2</h1>
+            </div>
+            
+                <h3>Write code that will return:</h3>
+                <h3>"Fizz" if it is divisible by 3</h3>
+                <h3>"Buzz" if it is divisible by 5</h3>
+                <h3>"FizzBuzz" if it is divisible by 3 and 5</h3>
+            </div>
             <a href="/"><button class="btn btn-primary btn-lg">Home Page</button></a>
-            <a href="/challenge3"><button class="btn btn-primary btn-lg">Next Challenge</button></a>
-        </div>
-    </div>
-<div class="container">
-<form action="/api/challenge2" method="POST">
-    <h1>
-        Write code that will return:
-        Fizz if it is divisible by 3
-        Buzz if it is divisible by 5
-        FizzBuzz if it is divisible by 3 and 5
-        e.g. 50
-    </h1>
-    
-        <textarea name="code" id="code-val" cols="100" rows="10" class="form-control form-rounded"></textarea>
-    <br />
-    
-        <input type="submit" id="code" value="Submit" class="form-control form-rounded">
- </form>   
+            <a href="/challenge3"><button class="btn btn-primary btn-lg">Next Challenge</button></a> 
     </div>
 
+    <div class="container">
+        <form action="/api/challenge2" method="POST">
+        <textarea name="code" id="code-val" cols="100" rows="10" class="form-control form-rounded"></textarea>
+        <br/>
+        <input type="submit" id="code" value="Submit" class="form-control form-rounded">
+        </form>   
+    </div>
 
 </body>
