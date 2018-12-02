@@ -1,34 +1,18 @@
-const jwt = require('jsonwebtoken'),
-	middleware = {}
+const middleware = {}
 
 // Require login
 middleware.isLoggedIn = (req, res, next) => {
-	const token = req.cookies.Authorization
-	console.log(token)
-	if (token) {
-		jwt.verify(token, process.env.secret, (err, decod) => {
-			if (err) {
-				res.status(403).json({
-					message: "Wrong Token"
-				})
-			} else {
-				req.decoded = decod;
-				next()
-			}
-		})
+	if (!req.isAuthenticated()) {
+		req.flash('error', 'You need to be logged in to do that')
+		return res.redirect('/')
 	} else {
-		req.flash('error', 'You must login to do that')
-		res.status(403).json({
-			message: "No Token"
-		})
+		req.flash('success', 'You are now logged in')
+		next()
 	}
-
 }
 
-middleware.destroySession = (req, res, next) => {
-	req.logout()
-	req.session.destroy()
-	res.redirect('/')
+// Validate user code input
+middleware.validate = (req, res, next) => {
+	console.log(req)
 }
-
 module.exports = middleware

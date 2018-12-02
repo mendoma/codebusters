@@ -19,15 +19,11 @@ app.use(express.static(__dirname + '/public'))
 app.use(logger('dev'))
 
 // Use handlebars
-app.engine('handlebars', hbs({
-    defaultLayout: 'main'
-}))
+app.engine('handlebars', hbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 app.use(flash())
 app.use(cookieParser())
-app.use(bodyParser.urlencoded({
-    extended: true
-}))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(session({
     secret: process.env.secret,
@@ -38,7 +34,7 @@ app.use(session({
 
 // Passport
 app.use(passport.initialize())
-// app.use(passport.session())
+app.use(passport.session())
 
 // Globals
 app.use((req, res, next) => {
