@@ -3,17 +3,20 @@
     <div class="jumbotron container-fluid">
         <div class="container">
             <div class="typewriter">
-                <h1>Challenge #3</h1>
+                <h1>Challenge #8</h1>
             </div>
             <a href="/"><button class="btn btn-primary btn-lg">Home Page</button></a>
-            <a href="/challenge4"><button class="btn btn-primary btn-lg">Next Challenge</button></a>
+            <a href="/challenge9"><button class="btn btn-primary btn-lg">Next Challenge</button></a>
         </div>
     </div>
 
     <div class="container">
-        <form action="/api/challenge3" method="POST">
+        <form action="/api/challenge8" method="POST">
             <h1>
-                Write a function to reverse the following string: "NodeJS"
+                This challenge is to determine if there is some subset of numbers in an array that can sum number S. 
+                Naive solution: generate every possible set(the power set), 
+                and then check if the sum of any of these sets equals the sum S.
+                e.g. arr = [1,2,3] sum = 5
             </h1>
 
             <textarea name="code" id="code-val" cols="100" rows="10" class="form-control form-rounded"></textarea>
