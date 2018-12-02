@@ -1,55 +1,41 @@
 const passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy,
-    passportJWT = require("passport-jwt"),
-    JWTStrategy = passportJWT.Strategy,
-    ExtractJWT = passportJWT.ExtractJwt,
     bcrypt = require('bcrypt'),
     { User } = require('../models/index')
 
-passport.serializeUser((user_id, done) => {
-    console.log('serialize:', user_id)
-    done(null, user_id)
-})
-passport.deserializeUser((user_id, done) => {
-    // console.log('deserialize:', user)
+passport.serializeUser(function (user_id, done) {
+    // console.log('serialize user id', user_id.username)
     done(null, user_id)
 })
 
-passport.use(new LocalStrategy(
+passport.deserializeUser(function (user_id, done) {
+    console.log('deserialize', user_id.username)
+    User.findById(user_id.id)
+    .then(function (res) {
+        done(null, res)
+    })
+    .catch(err => {
+        console.log(err)
+    })
+})
+
+passport.use('login', new LocalStrategy(
     (username, password, done) => {
+    console.log('strategy ran')
         User.findOne({
-                where: {
-                    username: username
-                }
+            where: {
+                username: username
+            }
+        })
+        .then((user) => {
+            if (!user) {
+                return done(null, false)
+            }
+            bcrypt.compare(password, user.password)
+            .then((auth) => {
+                if (!auth) return done(null, false)
+                done(null, user)
             })
-            .then(user => {
-                if (!user) {
-                    return done(null, false)
-                }
-                if (!user.password) {
-                    return done(null, false)
-                }
-                return done(null, user)
-            })
-            .catch(err => {
-                console.log('error', err)
-            })
-    }
-))
-
-passport.use(new JWTStrategy({
-        jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-        secretOrKey: process.env.secret
-    },
-    function (jwtPayload, done) {
-
-        return User.findOneById(jwtPayload.id)
-            .then(user => {
-                return done(null, user);
-            })
-            .catch(err => {
-                console.log(err)
-                return done(err)
-            })
+        })
     }
 ))

@@ -5,10 +5,12 @@ module.exports = (sequelize, DataType) => {
         username: {
             type: DataType.STRING,
             notNull: true,
+            notEmpty: true,
             unique: true
         },
         password: {
             type: DataType.STRING,
+            notEmpty: true,
             notNull: true
         }
     }, {
