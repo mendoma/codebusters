@@ -1,22 +1,17 @@
 const express = require('express'),
     passport = require('passport'),
-    bcrypt = require('bcrypt'),
     middleware = require('../middleware/authentication'),
-    {
-        User,
-        Game
-    } = require('../models/index'),
+    { User } = require('../models/index'),
     router = express.Router()
 
 // GET login page
 router.get('/users/login', (req, res) => {
-    console.log(req.user)
-    console.log(req.isAuthenticated())
     res.render('login')
 })
 
 // GET user home page
 router.get('/users/home', middleware.isLoggedIn, (req, res) => {
+    console.log(req.isAuthenticated)
     res.render('home')
 })
 
@@ -31,7 +26,6 @@ router.post('/users/register', (req, res) => {
         username: req.body.username,
         password: req.body.password
     }
-
     User.findOne({
             where: {
                 username: data.username
@@ -39,68 +33,47 @@ router.post('/users/register', (req, res) => {
         })
         .then(user => {
             if (user) {
-                console.log('username already taken')
-                res.json('username already taken')
+                console.log('Username already exists')
+                req.flash('error', 'Username already exists')
+                return res.redirect('/')
             } else {
                 User.create({
                         username: data.username,
                         password: data.password
                     })
                     .then(res => {
-                        const user_id = res.id
-                        console.log('user id:', user_id)
-                        console.log('user created')
-                        req.login(user_id, err => {
-                            console.log(err)
-                            req.flash('success', 'You have created your account successfully')
-                        })
+                        if (!res) return req.flash('Failed to create account')
+                        console.log('res:', res)
+                        return res
                     })
             }
+            req.login(req.body.id, err => {
+                if (err) {
+                    req.flash('success', 'Successfully created account. Please login')
+                } else {
+                    req.flash('success', 'Please login')
+                }
+            })
+            res.redirect('/')
         })
         .catch(err => {
-            console.log(err)
-            res.json(err)
+            req.flash('error', err)
         })
-    res.redirect('/')
 })
 
 // Login
-router.post('/users/login', (req, res, next) => {
-    passport.authenticate('local', (err, user, info) => {
-        if (err) {
-            return res.json(err)
-        }
-        if (!user) {
-            console.log('bad username')
-            return res.status(400).json('bad username')
-        }
-
-        if (user) {
-            bcrypt.compare(req.body.password, user.password)
-                .then(data => {
-                    const user_id = user.id
-
-                    if (data) {
-                        console.log('user id:', user_id)
-                        console.log('user logged in')
-                        req.login(user_id, err => {
-                            console.log(err)
-                            req.flash('success', 'You have created your account successfully')
-                        })
-                    } else {
-                        console.log('passwords do not match')
-                        return next()
-                    }
-                })
-                .catch(err => {
-                    return console.log(err)
-                })
-            res.redirect('/')
-        }
-    })(req, res, next)
-})
+router.post('/users/login', passport.authenticate('login', {
+    successRedirect: '/challenge1',
+    successMessage: 'You have logged in',
+    failureRedirect: '/',
+    failureFlash: true
+}))
 
 // Logout session
-router.get('/users/logout', middleware.destroySession)
+router.get('/users/logout', (req, res) => {
+    req.flash('success', 'You have logged out successfully')
+    req.logout()
+    res.redirect('/')
+})
 
 module.exports = router

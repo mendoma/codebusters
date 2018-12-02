@@ -1,16 +1,16 @@
-const express = require('express')
+const express = require('express'),
+    middleware = require('../middleware/authentication'),
 
-const router = express.Router()
+router = express.Router()
 
 // GET home page
 router.get('/', (req, res) => {
-    console.log(req.user)
-    console.log(req.isAuthenticated())
+    console.log('logged in?', req.isAuthenticated())
     res.render('index')
 })
 
 // GET code challenge1 page
-router.get('/challenge1', (req, res) => {
+router.get('/challenge1', middleware.isLoggedIn, (req, res) => {
     res.render('challenge1')
 })
 
@@ -55,7 +55,8 @@ router.get('/challenge5', (req, res) => {
 
 // Catch all
 router.get('*', (req, res) => {
-    res.send('Ooooops nothing to see here!')
+    req.flash('error', 'Ooooops nothing to see here!')
+    res.redirect('/')
 })
 
 module.exports = router

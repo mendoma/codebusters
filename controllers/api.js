@@ -1,6 +1,7 @@
-const express = require('express')
-const code = require('../code/code')
-const vm = require('vm')
+const express = require('express'),
+   code = require('../code/code'),
+   middleware = require('../middleware/authentication'),
+   vm = require('vm')
 
 const router = express.Router()
 
@@ -13,6 +14,8 @@ router.post('/api/challenge1', (req, res) => {
    console.log('user code:', result)
    console.log('correct answer:', addAnswer)
    console.log('correct code?', compare)
+   req.flash('success', 'Answer submitted')
+   // res.redirect('/challenge2')
 })
 
 router.post('/api/challenge2', (req, res) => {
@@ -23,6 +26,8 @@ router.post('/api/challenge2', (req, res) => {
    console.log('user code:', result)
    console.log('correct answer:', fizzBuzz)
    console.log('correct code?', compare)
+   req.flash('success', 'Answer submitted')
+   // res.redirect('/challenge3')
 })
 
 router.post('/api/challenge3', (req, res) => {
@@ -33,6 +38,8 @@ router.post('/api/challenge3', (req, res) => {
    console.log('user code:', result)
    console.log('correct answer:', reverse)
    console.log('correct code?', compare)
+   req.flash('success', 'Answer submitted')
+   // res.redirect('/challenge4')
 })
 
 router.post('/api/challenge4', (req, res) => {
@@ -104,7 +111,5 @@ router.post('/api/challenge10', (req, res) => {
    console.log('correct answer:', lucky_sevens)
    console.log('correct code?', compare)
 })
-
-
 
 module.exports = router

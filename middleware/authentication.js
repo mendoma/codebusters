@@ -2,17 +2,17 @@ const middleware = {}
 
 // Require login
 middleware.isLoggedIn = (req, res, next) => {
-	if (req.isAuthenticated()) {
-		return next()
+	if (!req.isAuthenticated()) {
+		req.flash('error', 'You need to be logged in to do that')
+		return res.redirect('/')
+	} else {
+		req.flash('success', 'You are now logged in')
+		next()
 	}
-	req.flash('error', 'You must login to do that')
-	res.redirect('/users/login')
 }
 
-middleware.destroySession = (req, res, next) => {
-	req.logout()
-	req.session.destroy()
-	res.redirect('/')
+// Validate user code input
+middleware.validate = (req, res, next) => {
+	console.log(req)
 }
-
 module.exports = middleware
