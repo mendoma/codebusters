@@ -1,11 +1,7 @@
 const express = require('express'),
     passport = require('passport'),
-    bcrypt = require('bcrypt'),
     middleware = require('../middleware/authentication'),
-    {
-        User,
-        Game
-    } = require('../models/index'),
+    { User } = require('../models/index'),
     router = express.Router()
 
 // GET login page
@@ -39,7 +35,7 @@ router.post('/users/register', (req, res) => {
             if (user) {
                 console.log('Username already exists')
                 req.flash('error', 'Username already exists')
-                return res.redirect('/##')
+                return res.redirect('/')
             } else {
                 User.create({
                         username: data.username,
@@ -75,8 +71,9 @@ router.post('/users/login', passport.authenticate('login', {
 
 // Logout session
 router.get('/users/logout', (req, res) => {
-        req.logout
-        req.flash('success', 'You have logged out successfully')
+    req.flash('success', 'You have logged out successfully')
+    req.logout()
+    res.redirect('/')
 })
 
 module.exports = router

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,7 @@
     <link rel="stylesheet" href="/css/style.css">
     <title>Codebusters</title>
 </head>
+
 <body id="home">
 
     {{!-- NavBar --}}
@@ -21,19 +23,25 @@
             </div>
 
             <ul class="nav navbar-nav navbar-right">
-                {{!-- Icons --}}
                 {{!-- Login --}}
-                <button type="button" class="btn" data-toggle="modal" data-target="#myModal">
-                    <a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a>
-                </button>
-                {{!-- Logout --}}
-                <button type="button" class="btn">
-                    <a href="/users/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
-                </button>
-                {{!-- Sign-Up --}}
-                <button type="button" class="btn" data-toggle="modal" data-target="#secModal">
-                    <a href="#"><span class="glyphicon glyphicon-user"></span> Sign-Up</a>
-                </button>
+                {{#unless currentUser}}
+                    <button type="button" class="btn" data-toggle="modal" data-target="#myModal">
+                        <a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+                    </button>
+                    {{!-- Sign-Up --}}
+                    <button type="button" class="btn" data-toggle="modal" data-target="#secModal">
+                        <a href="#"><span class="glyphicon glyphicon-user"></span> Sign-Up</a>
+                    </button>
+                {{/unless}}
+                {{#if currentUser}}
+                    {{!-- Logout --}}
+                    <button type="button" class="btn">
+                        <a href="/users/logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a>
+                    </button>
+                    <button type="button" class="btn">
+                        You are logged in as {{currentUser.username}}
+                    </button>
+                {{/if}}
             </ul>
 
 
@@ -109,14 +117,14 @@
     {{!-- Flash messages --}}
     <div class="container">
         {{#if error}}
-            <div class="alert alert-danger" role="alert">
-                {{error}}
-            </div>
+        <div class="alert alert-danger" role="alert">
+            {{error}}
+        </div>
         {{/if}}
         {{#if success}}
-            <div class="alert alert-success" role="alert">
-                {{success}}
-            </div>
+        <div class="alert alert-success" role="alert">
+            {{success}}
+        </div>
         {{/if}}
     </div>
 
@@ -132,4 +140,5 @@
 
     <script src="/javascripts/main.js"></script>
 </body>
+
 </html>
