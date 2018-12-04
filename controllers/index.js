@@ -38,7 +38,7 @@ router.post('/code', middleware.isLoggedIn, (req, res, next) => {
             res.redirect('/')
         }
         const gameId = result.dataValues.id
-        res.redirect('challenge1' + gameId + '/challenge1')
+        res.redirect('/challenge/' + gameId + '/challenge1')
     })
     .catch(err => {
         req.flash('error', err)
