@@ -1,17 +1,22 @@
 const Sequelize = require('sequelize'),
+    config = require('../config/keys'),
     UserModel = require('./user'),
-    GameModel = require('./game')
+    GameModel = require('./game'),
+    AnswerModel = require('./answers')
 
-const private = process.env
-const sequelize = new Sequelize(private.db_name, private.user, private.password, {
-    host: private.db_host,
+const sequelize = new Sequelize(config.db_name, config.db_user, config.db_password, {
+    host: config.db_host,
     dialect: 'mysql'
 })
 
 const User = UserModel(sequelize, Sequelize)
 const Game = GameModel(sequelize, Sequelize)
+const Answer = AnswerModel(sequelize, Sequelize)
 
+User.hasMany(Game)
 Game.belongsTo(User)
+Game.hasMany(Answer)
+Answer.belongsTo(Game)
 
 sequelize
     .sync()
@@ -21,5 +26,6 @@ sequelize
 
 module.exports = {
     User,
-    Game
+    Game,
+    Answer
 }

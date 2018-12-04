@@ -1,9 +1,12 @@
 module.exports = (sequelize, DataType) => {
-    return sequelize.define('game', {
-        total_score: {
+    return sequelize.define('answers', {
+        score: {
             type: DataType.INTEGER
         },
-        total_time: {
+        code: {
+            type: DataType.TEXT
+        },
+        time: {
             type: DataType.TIME
         }
     })
