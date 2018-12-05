@@ -50,46 +50,46 @@ router.post('/code', middleware.isLoggedIn, (req, res, next) => {
 router.get('/challenge/:gameId/challenge1', middleware.isLoggedIn, (req, res) => {
     // console.log('req params', req.params + 'end of req params')
     // console.log('logged in user', req.user.username)
-    res.render('challenge1')
+    res.render('challenge1', { gameId: req.params.gameId })
 })
 
 // GET code challenge2 page
 router.get('/challenge/:gameId/challenge2', middleware.isLoggedIn, (req, res) => {
-    res.render('challenge2')
+    res.render('challenge2', { gameId: req.params.gameId })
 })
 
 // GET code challenge3 page
 router.get('/challenge/:gameId/challenge3', middleware.isLoggedIn, (req, res) => {
-    res.render('challenge3')
+    res.render('challenge3', { gameId: req.params.gameId })
 })
 
 // GET code challenge4 page
 router.get('/challenge/:gameId/challenge4', middleware.isLoggedIn, (req, res) => {
-    res.render('challenge4')
+    res.render('challenge4', { gameId: req.params.gameId })
 })
 
 router.get('/challenge/:gameId/challenge5', middleware.isLoggedIn, (req, res) => {
-    res.render('challenge5')
+    res.render('challenge5', { gameId: req.params.gameId })
  })
  
  router.get('/challenge/:gameId/challenge6', middleware.isLoggedIn, (req, res) => {
-    res.render('challenge6')
+    res.render('challenge6', { gameId: req.params.gameId })
  })
  
  router.get('/challenge/:gameId/challenge7', middleware.isLoggedIn, (req, res) => {
-    res.render('challenge7')
+    res.render('challenge7', { gameId: req.params.gameId })
  })
  
  router.get('/challenge/:gameId/challenge8', middleware.isLoggedIn, (req, res) => {
-    res.render('challenge8')
+    res.render('challenge8', { gameId: req.params.gameId })
  })
  
  router.get('/challenge/:gameId/challenge9', middleware.isLoggedIn, (req, res) => {
-    res.render('challenge9')
+    res.render('challenge9', { gameId: req.params.gameId })
  })
  
  router.get('/challenge/:gameId/challenge10', middleware.isLoggedIn, (req, res) => {
-    res.render('challenge10')
+    res.render('challenge10', { gameId: req.params.gameId })
  })
 
 // Catch all
