@@ -87,7 +87,7 @@ router.post('/users/login', (req, res, next) => {
             req.flash('error', err)
             return res.redirect('/')
         }
-        req.flash('success', 'Welcome ' + user.fullname)
+        req.flash('success', 'Welcome ' + user.username)
         return res.redirect('/challenge/' + gameId + '/challenge1');
       });
     })(req, res, next);
