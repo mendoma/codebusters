@@ -119,5 +119,5 @@ module.exports = {
         }     
         // if loop is finished and no elements summed to 7
         return false;     
-      }    
+      }
 }

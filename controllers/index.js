@@ -29,27 +29,8 @@ router.get('/', (req, res, next) => {
     res.render('index')
 })
 
-// POST code challenge
-router.post('/code', middleware.isLoggedIn, (req, res, next) => {
-    Game.create({ userId: req.user.id })
-    .then(result => {
-        if (!result) {
-            req.flash('Game could not be created.')
-            res.redirect('/')
-        }
-        const gameId = result.dataValues.id
-        res.redirect('/challenge/' + gameId + '/challenge1')
-    })
-    .catch(err => {
-        req.flash('error', err)
-        return res.redirect('/')
-    })
-})
-
 // GET code challenge1 page
 router.get('/challenge/:gameId/challenge1', middleware.isLoggedIn, (req, res) => {
-    // console.log('req params', req.params + 'end of req params')
-    // console.log('logged in user', req.user.username)
     res.render('challenge1', { gameId: req.params.gameId })
 })
 

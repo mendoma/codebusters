@@ -6,13 +6,10 @@
                 <h1>Challenge #6</h1>
             </div>
             <h3>
-                Write a function to return "true" if there is a prime number in a list of array.  
-                A prime number is greater than 1. 
+                Write a function to return "true" if there is a prime number in a list of array.
+                A prime number is greater than 1.
                 e.g. 17
             </h3>
-
-            <a href="/"><button class="btn btn-primary btn-lg">Home Page</button></a>
-            <a href="/challenge7"><button class="btn btn-primary btn-lg">Next Challenge</button></a>
         </div>
     </div>
 
@@ -21,9 +18,9 @@
 
             <textarea name="code" id="code-val" cols="100" rows="10" class="form-control form-rounded"></textarea>
             <br />
-
-            <input type="submit" id="code" value="Submit" class="form-control form-rounded">
-
+            <input type="submit" id="code" value="Submit" class="btn btn-primary btn-lg">
+            <a href="/challenge/{{gameId}}/challenge7"><button class="btn btn-primary btn-lg">Next Challenge</button></a>
+            <input type="submit" formaction="/api/quit" method="POST" value="Quit" class="btn btn-primary btn-lg btn-danger">
         </form>
     </div>
 </body>

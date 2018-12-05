@@ -10,8 +10,6 @@
                 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 19, 20]
             </h3>
         </div>
-        <a href="/"><button class="btn btn-primary btn-lg">Home Page</button></a>
-        <a href="/challenge5"><button class="btn btn-primary btn-lg">Next Challenge</button></a>
     </div>
 
 
@@ -19,7 +17,9 @@
         <form action="/api/{{gameId}}/challenge4" method="POST">
             <textarea name="code" id="code-val" cols="100" rows="10" class="form-control form-rounded"></textarea>
             <br />
-            <input type="submit" id="code" value="Submit" class="form-control form-rounded">
+            <input type="submit" id="code" value="Submit" class="btn btn-primary btn-lg right">
+            <a href="/challenge/{{gameId}}/challenge5"><button class="btn btn-primary btn-lg">Next Challenge</button></a>
+            <input type="submit" formaction="/api/quit" method="POST" value="Quit" class="btn btn-primary btn-lg btn-danger">
         </form>
     </div>
 </body>
