@@ -4,10 +4,14 @@ const Sequelize = require('sequelize'),
     GameModel = require('./game'),
     AnswerModel = require('./answers')
 
-const sequelize = new Sequelize(config.db_name, config.db_user, config.db_password, {
-    host: config.db_host,
-    dialect: 'mysql'
-})
+if (process.env.JAWSDB_URL) {
+    var sequelize = new Sequelize(process.env.JAWSDB_URL)
+} else {
+    var sequelize = new Sequelize(config.db_name, config.db_user, config.db_password, {
+        host: config.db_host,
+        dialect: 'mysql'
+    })
+}
 
 const User = UserModel(sequelize, Sequelize)
 const Game = GameModel(sequelize, Sequelize)
