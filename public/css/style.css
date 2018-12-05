@@ -11,7 +11,7 @@ body {
 
 .footer {
     margin-top: 20px;
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     text-align: center;
     color: red;
 }
@@ -23,7 +23,6 @@ body {
     background-position: center;
     height: 100%;
     color: black;
-
 }
 
 .typewriter h1 {
@@ -91,10 +90,6 @@ body {
     text-align: center;
     color: black
 }
-/* 
-.btn-primary {
-    margin-top: 50px;
-} */
 
 .btn {
     margin: 10px 5px 10px 5px;
