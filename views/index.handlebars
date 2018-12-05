@@ -1,5 +1,3 @@
-<body id="home">
-
 {{!-- Header jumbotron--}}
 <div class="jumbotron container panel">
     <div class="container">
@@ -11,7 +9,10 @@
         </h3>
 
         <a href="/"><button class="btn btn-primary btn-lg">Home Page</button></a>
-        <a href="/challenge1"><button class="btn btn-primary btn-lg">Code Challenge</button></a>
+        {{!-- <a href="/challenge1"><button class="btn btn-primary btn-lg">Code Challenge</button></a> --}}
+        <form action="/code" method="POST">
+            <input type="submit" value="Code Challenge" class="btn btn-primary btn-lg">
+        </form>
     </div>
 </div>
 
@@ -47,4 +48,3 @@
         </tbody>
     </table>
 </div>
-</body>

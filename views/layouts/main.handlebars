@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,8 +12,7 @@
     <link rel="stylesheet" href="/css/style.css">
     <title>Codebusters</title>
 </head>
-
-{{!-- <body id="home"> --}}
+<body id="home">
 
     {{!-- NavBar --}}
     <nav class="navbar navbar-inverse">
@@ -26,7 +24,7 @@
                 {{!-- Login --}}
                 {{#unless currentUser}}
                     <button type="button" class="btn" data-toggle="modal" data-target="#myModal">
-                        <a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+                        <a href="#"><span class="glyphicon glyphicon-log-in"></span>Login</a>
                     </button>
                     {{!-- Sign-Up --}}
                     <button type="button" class="btn" data-toggle="modal" data-target="#secModal">
@@ -39,11 +37,10 @@
                         <a href="/users/logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a>
                     </button>
                     <button type="button" class="btn">
-                        You are logged in as {{currentUser.username}}
+                        You are logged in as {{currentUser.fullname}}
                     </button>
                 {{/if}}
             </ul>
-
 
             {{!-- Modal Pop-Up for Login Button --}}
             <div class="modal" id="myModal">
@@ -81,7 +78,6 @@
                 </div>
             </div>
 
-
             {{!-- Modal Pop-Up for Sign-Up Button --}}
             <div class="modal" id="secModal">
                 <div class="modal-dialog">
@@ -95,8 +91,11 @@
 
                         <!-- Modal body for Sign-Up Button -->
                         <div class="modal-body">
-
                             <form action="/users/register" method="POST">
+                                <div class="form-group">
+                                    <label for="fullname">Full Name</label>
+                                    <input type="fullname" class="form-control" placeholder="Enter your full name" name="fullname">
+                                </div>
                                 <div class="form-group">
                                     <label for="username">Username</label>
                                     <input type="username" class="form-control" placeholder="Enter player name" name="username">
@@ -109,7 +108,6 @@
                             </form>
                         </div>
                     </div>
-
                 </div>
             </div>
     </nav>
@@ -139,6 +137,5 @@
     </div>
 
     <script src="/javascripts/main.js"></script>
-{{!-- </body> --}}
-
+</body>
 </html>

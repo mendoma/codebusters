@@ -1,6 +1,6 @@
 const express = require('express'),
     passport = require('passport'),
-    middleware = require('../middleware/authentication'),
+    middleware = require('../middleware/middleware'),
     { User } = require('../models/index'),
     router = express.Router()
 
@@ -23,6 +23,7 @@ router.get('/users/register', (req, res) => {
 // POST register
 router.post('/users/register', (req, res) => {
     const data = {
+        fullname: req.body.fullname,
         username: req.body.username,
         password: req.body.password
     }
@@ -38,18 +39,18 @@ router.post('/users/register', (req, res) => {
                 return res.redirect('/')
             } else {
                 User.create({
+                        fullname: data.fullname,
                         username: data.username,
                         password: data.password
                     })
                     .then(res => {
                         if (!res) return req.flash('Failed to create account')
-                        console.log('res:', res)
                         return res
                     })
             }
             req.login(req.body.id, err => {
                 if (err) {
-                    req.flash('success', 'Successfully created account. Please login')
+                    req.flash('success', 'Welcome ' + req.body.fullname + '. You have successfully created your account.')
                 } else {
                     req.flash('success', 'Please login')
                 }
@@ -62,12 +63,35 @@ router.post('/users/register', (req, res) => {
 })
 
 // Login
-router.post('/users/login', passport.authenticate('login', {
-    successRedirect: '/challenge1',
-    successMessage: 'You have logged in',
-    failureRedirect: '/',
-    failureFlash: true
-}))
+// router.post('/users/login', passport.authenticate('login', (req, res, done) => {
+//     successMessage: 'You have logged in',
+//     successRedirect: '/challenge/' + req.body.gameId + '/challenge1',
+//     failureFlash: true,
+//     failureRedirect: '/'
+// }))
+router.post('/users/login', (req, res, next) => {
+    passport.authenticate('login', (err, user, info) => {
+        console.log('login', err)
+        console.log('logininfo', info)
+      if (err) {
+          req.flash('error', err)
+          res.redirect('/')
+        }
+      if (!user) {
+          console.log(user)
+          req.flash('error', 'Username or password is incorrect')
+          return res.redirect('/')
+        }
+      req.logIn(user, function(err) {
+        if (err) {
+            req.flash('error', err)
+            return res.redirect('/')
+        }
+        req.flash('success', 'Welcome ' + user.fullname)
+        return res.redirect('/challenge/' + gameId + '/challenge1');
+      });
+    })(req, res, next);
+  });
 
 // Logout session
 router.get('/users/logout', (req, res) => {

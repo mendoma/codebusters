@@ -1,21 +1,33 @@
 const express = require('express'),
    code = require('../code/code'),
-   middleware = require('../middleware/authentication'),
-   vm = require('vm')
+   vm = require('vm'),
+   middleware = require('../middleware/middleware'),
+   { User, Game, Answer } = require('../models/index')
 
 const router = express.Router()
 
 // Test code
 router.post('/api/challenge1', (req, res) => {
+   console.log(req.params)
+   const user_id = req.user.dataValues.id
    const input = req.body.code
    const addAnswer = code.addNumbers(2, 2)
    let result = vm.runInNewContext(input)
    let compare = result === addAnswer
-   console.log('user code:', result)
-   console.log('correct answer:', addAnswer)
-   console.log('correct code?', compare)
+   console.log('correct:', compare)
+   console.log('reqeust:', req)
+   if (compare) {
+      Answer.create({
+         score: 5,
+         code: input,
+      }, { where: { gameId: user_id }})
+   } else {
+      Game.update({
+         userId: user_id
+      }, { where: { id: user_id }})
+   }
    req.flash('success', 'Answer submitted')
-   // res.redirect('/challenge2')
+   res.redirect('/challenge2')
 })
 
 router.post('/api/challenge2', (req, res) => {
