@@ -33,9 +33,9 @@ passport.use('login', new LocalStrategy(
                 if (!auth) {
                     return done(null, false)
                 }
-                Game.create({ userId: username.id })
+                Game.create({ userId: user.id })
                 .then(result => {
-                    console.log('in passport', result)
+                    console.log('in passport', result.user)
                     if (!result) {
                         req.flash('Game could not be created.')
                         return done(null, false)
