@@ -6,10 +6,13 @@ const express = require('express'),
     hbs = require('express-handlebars'),
     bodyParser = require('body-parser'),
     logger = require('morgan'),
+    favicon = require('serve-favicon'),
+    path = require('path'),
     flash = require('connect-flash'),
     passport = require('passport')
 
 const app = express()
+app.use(favicon(path.join(__dirname, '/public/images/favicon.ico')))
 
 // Port to listen on
 const PORT = process.env.PORT || 8080
