@@ -1,10 +1,10 @@
 # Codebusters
 
-Codebusters is a game web app designed to test users to complete short coding 
+Codebusters is a game web app designed to test users in completing short coding 
 challenges. Users must login or sign-up for an account in order to access the game.
 Players will receive points for correct answers, once completed the number of points 
 will be displayed on the homepage's leaderboard. Players with the highest points
-will get displayer in their respective ranking orders (1 - First Place).
+will get displayed accordingly in ranking (1 - First Place).
 
 ##Tech/Frameworks used:
 
