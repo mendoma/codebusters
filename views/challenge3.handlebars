@@ -9,18 +9,16 @@
                 Write a function to reverse the following string: "NodeJS"
             </h3>
             <a href="/"><button class="btn btn-primary btn-lg">Home Page</button></a>
-            <a href="/challenge4"><button class="btn btn-primary btn-lg">Next Challenge</button></a>
         </div>
     </div>
 
     <div class="container">
         <form action="/api/{{gameId}}/challenge3" method="POST">
-
             <textarea name="code" id="code-val" cols="100" rows="10" class="form-control form-rounded"></textarea>
             <br />
-
-            <input type="submit" id="code" value="Submit" class="form-control form-rounded">
-
+            <input type="submit" id="code" value="Submit" class="btn btn-primary btn-lg right">
+            <a href="/challenge/{{gameId}}/challenge4"><button class="btn btn-primary btn-lg">Next Challenge</button></a>
+            <input type="submit" formaction="/api/quit" method="POST" value="Quit" class="btn btn-primary btn-lg btn-danger">
         </form>
     </div>
 </body>

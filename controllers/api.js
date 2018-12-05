@@ -8,18 +8,24 @@ const router = express.Router()
 
 // Test code
 router.post('/api/:gameId/challenge1', (req, res) => {
-   const user_id = req.user.dataValues.id
+   // const user_id = req.user.dataValues.id
    const input = req.body.code
    const addAnswer = code.addNumbers(2, 2)
    let result = vm.runInNewContext(input)
    let compare = result === addAnswer
    console.log('correct:', compare)
-   console.log('reqeust:', res)
+   // console.log('reqeust:', res)
    if (compare) {
       Answer.create({
          score: 5,
          code: input,
          gameId: req.params.gameId
+      })
+      .then(update => {
+         console.log('update', update.dataValues)
+         Game.update({
+            total_score: update.dataValues.score
+         }, { where: { id: req.params.gameId }})
       })
    } else {
       Answer.create({
@@ -43,6 +49,12 @@ router.post('/api/:gameId/challenge2', (req, res) => {
          code: input,
          gameId: req.params.gameId
       })
+      .then(update => {
+         console.log('update', update.dataValues)
+         Game.update({
+            total_score: update.dataValues.score
+         }, { where: { id: req.params.gameId }})
+      })
    } else {
       Answer.create({
          score: null,
@@ -64,6 +76,12 @@ router.post('/api/:gameId/challenge3', (req, res) => {
          score: 5,
          code: input,
          gameId: req.params.gameId
+      })
+      .then(update => {
+         console.log('update', update.dataValues)
+         Game.update({
+            total_score: update.dataValues.score
+         }, { where: { id: req.params.gameId }})
       })
    } else {
       Answer.create({
@@ -87,6 +105,12 @@ router.post('/api/:gameId/challenge4', (req, res) => {
          code: input,
          gameId: req.params.gameId
       })
+      .then(update => {
+         console.log('update', update.dataValues)
+         Game.update({
+            total_score: update.dataValues.score
+         }, { where: { id: req.params.gameId }})
+      })
    } else {
       Answer.create({
          score: null,
@@ -107,8 +131,20 @@ router.post('/api/:gameId/challenge5', (req, res) => {
       Answer.create({
          score: 5,
          code: input,
-         gameId: gameId
-      }, { where: { gameId: gameId }})
+         gameId: req.params.gameId
+      })
+      .then(update => {
+         console.log('update', update.dataValues)
+         Game.update({
+            total_score: update.dataValues.score
+         }, { where: { id: req.params.gameId }})
+      })
+   } else {
+      Answer.create({
+         score: null,
+         code: input,
+         gameId: req.params.gameId
+      })
    }
    req.flash('success', 'Answer submitted')
    res.redirect('/challenge/' + gameId + '/challenge6')
@@ -123,8 +159,20 @@ router.post('/api/:gameId/challenge6', (req, res) => {
       Answer.create({
          score: 5,
          code: input,
-         gameId: gameId
-      }, { where: { gameId: gameId }})
+         gameId: req.params.gameId
+      })
+      .then(update => {
+         console.log('update', update.dataValues)
+         Game.update({
+            total_score: update.dataValues.score
+         }, { where: { id: req.params.gameId }})
+      })
+   } else {
+      Answer.create({
+         score: null,
+         code: input,
+         gameId: req.params.gameId
+      })
    }
    req.flash('success', 'Answer submitted')
    res.redirect('/challenge/' + gameId + '/challenge7')
@@ -132,15 +180,27 @@ router.post('/api/:gameId/challenge6', (req, res) => {
 
 router.post('/api/:gameId/challenge7', (req, res) => {
    const input = req.body.code
-   const bubblesort = code.bubblesort()
+   const bubblesort = code.bubblesort([4,2,5,3])
    let result = vm.runInNewContext(input)
    let compare = result === bubblesort
    if (compare) {
       Answer.create({
          score: 5,
          code: input,
-         gameId: gameId
-      }, { where: { gameId: gameId }})
+         gameId: req.params.gameId
+      })
+      .then(update => {
+         console.log('update', update.dataValues)
+         Game.update({
+            total_score: update.dataValues.score
+         }, { where: { id: req.params.gameId }})
+      })
+   } else {
+      Answer.create({
+         score: null,
+         code: input,
+         gameId: req.params.gameId
+      })
    }
    req.flash('success', 'Answer submitted')
    res.redirect('/challenge/' + gameId + '/challenge8')
@@ -148,15 +208,27 @@ router.post('/api/:gameId/challenge7', (req, res) => {
 
 router.post('/api/:gameId/challenge8', (req, res) => {
    const input = req.body.code
-   const ArrayAdditionI = code.ArrayAdditionI()
+   const ArrayAdditionI = code.ArrayAdditionI([1,2,3])
    let result = vm.runInNewContext(input)
    let compare = result === ArrayAdditionI
    if (compare) {
       Answer.create({
          score: 5,
          code: input,
-         gameId: gameId
-      }, { where: { gameId: gameId }})
+         gameId: req.params.gameId
+      })
+      .then(update => {
+         console.log('update', update.dataValues)
+         Game.update({
+            total_score: update.dataValues.score
+         }, { where: { id: req.params.gameId }})
+      })
+   } else {
+      Answer.create({
+         score: null,
+         code: input,
+         gameId: req.params.gameId
+      })
    }
    req.flash('success', 'Answer submitted')
    res.redirect('/challenge/' + gameId + '/challenge9')
@@ -164,15 +236,27 @@ router.post('/api/:gameId/challenge8', (req, res) => {
 
 router.post('/api/:gameId/challenge9', (req, res) => {
    const input = req.body.code
-   const simple_clock_angle = code.simple_clock_angle()
+   const simple_clock_angle = code.simple_clock_angle(15)
    let result = vm.runInNewContext(input)
    let compare = result === simple_clock_angle
    if (compare) {
       Answer.create({
          score: 5,
          code: input,
-         gameId: gameId
-      }, { where: { gameId: gameId }})
+         gameId: req.params.gameId
+      })
+      .then(update => {
+         console.log('update', update.dataValues)
+         Game.update({
+            total_score: update.dataValues.score
+         }, { where: { id: req.params.gameId }})
+      })
+   } else {
+      Answer.create({
+         score: null,
+         code: input,
+         gameId: req.params.gameId
+      })
    }
    req.flash('success', 'Answer submitted')
    res.redirect('/challenge/' + gameId + '/challenge10')
@@ -180,17 +264,37 @@ router.post('/api/:gameId/challenge9', (req, res) => {
 
 router.post('/api/:gameId/challenge10', (req, res) => {
    const input = req.body.code
-   const lucky_sevens = code.lucky_sevens()
+   const lucky_sevens = code.lucky_sevens([2,1,5,1,0])
    let result = vm.runInNewContext(input)
    let compare = result === lucky_sevens
    if (compare) {
       Answer.create({
          score: 5,
          code: input,
-         gameId: gameId
-      }, { where: { gameId: gameId }})
+         gameId: req.params.gameId
+      })
+      .then(update => {
+         console.log('update', update.dataValues)
+         Game.update({
+            total_score: update.dataValues.score
+         }, { where: { id: req.params.gameId }})
+      })
+      .then(total => {
+         console.log('total', total)
+      })
+   } else {
+      Answer.create({
+         score: null,
+         code: input,
+         gameId: req.params.gameId
+      })
    }
    req.flash('success', 'Code challenge completed!')
+   res.redirect('/')
+})
+
+router.post('/api/quit', (req, res, next) => {
+   req.flash('success', 'Thank you for playing')
    res.redirect('/')
 })
 

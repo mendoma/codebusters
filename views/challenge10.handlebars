@@ -6,24 +6,19 @@
                 <h1>Challenge #10</h1>
             </div>
             <h3>
-                Write a function called lucky_sevens which takes an array of integers that 
+                Write a function called lucky_sevens which takes an array of integers that
                 return true if any three consecutive elements sum to 7.
                 e.g. [2,1,5,1,0]
             </h3>
-
-            <a href="/"><button class="btn btn-primary btn-lg">Home Page</button></a>
-            <!--a href="/challenge10"><button class="btn btn-primary btn-lg">Next Challenge</button></a-->
         </div>
     </div>
 
     <div class="container">
         <form action="/api/{{gameId}}/challenge10" method="POST">
-
             <textarea name="code" id="code-val" cols="100" rows="10" class="form-control form-rounded"></textarea>
             <br />
-
-            <input type="submit" id="code" value="Submit" class="form-control form-rounded">
-
+            <input type="submit" id="code" value="Submit" class="btn btn-primary btn-lg right">
+            <input type="submit" formaction="/api/quit" method="POST" value="Finish" class="btn btn-primary btn-lg btn-danger">
         </form>
     </div>
 </body>

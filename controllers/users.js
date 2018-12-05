@@ -62,13 +62,6 @@ router.post('/users/register', (req, res) => {
         })
 })
 
-// Login
-// router.post('/users/login', passport.authenticate('login', (req, res, done) => {
-//     successMessage: 'You have logged in',
-//     successRedirect: '/challenge/' + req.body.gameId + '/challenge1',
-//     failureFlash: true,
-//     failureRedirect: '/'
-// }))
 router.post('/users/login', (req, res, next) => {
     passport.authenticate('login', (err, user, info) => {
         console.log('login', err)
@@ -88,10 +81,14 @@ router.post('/users/login', (req, res, next) => {
             return res.redirect('/')
         }
         req.flash('success', 'Welcome ' + user.fullname)
-        return res.redirect('/challenge/' + gameId + '/challenge1');
+        return res.redirect('/challenge/' + gameId + '/challenge1')
       });
     })(req, res, next);
-  });
+  })
+
+  router.get('/users/code', (req, res, next) => {
+    return res.redirect('/challenge/' + gameId + '/challenge1')
+  })
 
 // Logout session
 router.get('/users/logout', (req, res) => {

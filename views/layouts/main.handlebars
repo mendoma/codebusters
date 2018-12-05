@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,35 +13,47 @@
     <link rel="stylesheet" href="/css/style.css">
     <title>Codebusters</title>
 </head>
-{{!-- <body id="home"> --}}
+{{!--
+
+<body id="home"> --}}
 
     {{!-- NavBar --}}
     <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
+        <div class="container">
             <div class="navbar-header">
+                <a href="/"><button class="btn">Home Page</button></a>
             </div>
-
-            <ul class="nav navbar-nav navbar-right">
-                {{!-- Login --}}
-                {{#unless currentUser}}
-                    <button type="button" class="btn" data-toggle="modal" data-target="#myModal">
-                        <a href="#"><span class="glyphicon glyphicon-log-in"></span>Login</a>
-                    </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="nav navbar-nav navbar-right">
+                    {{!-- Login --}}
+                    <li class="nav-item">
+                        {{#unless currentUser}}
+                        <button type="button" class="btn" data-toggle="modal" data-target="#myModal">
+                            <a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+                        </button>
+                    </li>
                     {{!-- Sign-Up --}}
-                    <button type="button" class="btn" data-toggle="modal" data-target="#secModal">
-                        <a href="#"><span class="glyphicon glyphicon-user"></span> Sign-Up</a>
-                    </button>
-                {{/unless}}
-                {{#if currentUser}}
+                    <li class="nav-item">
+                        <button type="button" class="btn" data-toggle="modal" data-target="#secModal">
+                            <a href="#"><span class="glyphicon glyphicon-user"></span> Sign-Up</a>
+                        </button>
+                    </li>
+                    {{/unless}}
+                    {{#if currentUser}}
                     {{!-- Logout --}}
-                    <button type="button" class="btn">
-                        <a href="/users/logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a>
-                    </button>
-                    <button type="button" class="btn">
-                        You are logged in as {{currentUser.fullname}}
-                    </button>
-                {{/if}}
-            </ul>
+                    <li class="nav-item">
+                        <button type="button" class="btn">
+                            <a href="/users/logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a>
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="btn" id="loggedIn">
+                            You are logged in as {{currentUser.fullname}}
+                        </button>
+                    </li>
+                    {{/if}}
+                </ul>
+            </div>
 
             {{!-- Modal Pop-Up for Login Button --}}
             <div class="modal" id="myModal">
@@ -66,13 +79,9 @@
                                     <input type="password" class="form-control" id="password" placeholder="Enter password"
                                         name="password" required>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary">Login</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                             </form>
-                        </div>
-
-                        <!-- Modal footer for for Login Button-->
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
@@ -102,7 +111,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label>
-                                    <input type="password" class="form-control" placeholder="Enter password" name="password"  minlength="1" required>
+                                    <input type="password" class="form-control" placeholder="Enter password" name="password"
+                                        minlength="1" required>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
@@ -137,5 +147,6 @@
     </div>
 
     <script src="/javascripts/main.js"></script>
-{{!-- </body> --}}
+</body>
+
 </html>

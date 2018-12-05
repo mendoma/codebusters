@@ -5,14 +5,12 @@
             <div class="typewriter">
                 <h1>Challenge #5</h1>
             </div>
-            
-                <h3>Write a function to return:</h3>
-                <h3>"true"  if a given number is an even number </h3>
-                <h3>"false" if a given number is an odd number</h3>
-           
+
+            <h3>Write a function to return:</h3>
+            <h3>"true" if a given number is an even number </h3>
+            <h3>"false" if a given number is an odd number</h3>
+
         </div>
-            <a href="/"><button class="btn btn-primary btn-lg">Home Page</button></a>
-            <a href="/challenge6"><button class="btn btn-primary btn-lg">Next Challenge</button></a>
     </div>
 
     <div class="container">
@@ -20,9 +18,9 @@
 
             <textarea name="code" id="code-val" cols="100" rows="10" class="form-control form-rounded"></textarea>
             <br />
-
-            <input type="submit" id="code" value="Submit" class="form-control form-rounded">
-
+            <input type="submit" id="code" value="Submit" class="btn btn-primary btn-lg right">
+            <a href="/challenge/{{gameId}}/challenge6"><button class="btn btn-primary btn-lg">Next Challenge</button></a>
+            <input type="submit" formaction="/api/quit" method="POST" value="Quit" class="btn btn-primary btn-lg btn-danger">
         </form>
     </div>
 </body>
