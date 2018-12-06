@@ -11,9 +11,9 @@ module.exports = {
 	},
 	addScoreDB: (req, res, next, user) => {
 		console.log('user_id', user)
-			Game.increment({
-			   score: 5
-			}, { where: { id:  1 }})
+		Game.increment({
+			score: 5
+		}, { where: { id:  1 }})
 	},
 	validate: (req, res, next) => {
 		const code = req.body.code

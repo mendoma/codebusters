@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/css/style.css">
     <title>Codebusters</title>
 </head>
+
 {{!--
 
 <body id="home"> --}}
@@ -72,12 +73,12 @@
                                 <div class="form-group">
                                     <label for="username">Username</label>
                                     <input type="username" class="form-control" id="username" placeholder="Enter your username"
-                                        name="username" required>
+                                        name="username" minlength="4" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label>
                                     <input type="password" class="form-control" id="password" placeholder="Enter password"
-                                        name="password" required>
+                                        name="password" minlength="4" required>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Login</button>
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -103,16 +104,16 @@
                             <form action="/users/register" method="POST">
                                 <div class="form-group">
                                     <label for="fullname">Full Name</label>
-                                    <input type="fullname" class="form-control" placeholder="Enter your full name" name="fullname">
+                                    <input type="fullname" class="form-control" placeholder="Enter your full name" name="fullname" minlength="4" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="username">Username</label>
-                                    <input type="username" class="form-control" placeholder="Enter player name" name="username">
+                                    <input type="username" class="form-control" placeholder="Enter player name" name="username" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label>
                                     <input type="password" class="form-control" placeholder="Enter password" name="password"
-                                        minlength="1" required>
+                                        minlength="4" required>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>

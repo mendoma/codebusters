@@ -15,7 +15,7 @@
 
     <div class="container">
         <form action="/api/{{gameId}}/challenge10" method="POST">
-            <textarea name="code" id="code-val" cols="100" rows="10" class="form-control form-rounded"></textarea>
+            <textarea name="code" id="code-val" cols="100" rows="10" class="form-control form-rounded" minlength="10"></textarea>
             <br />
             <input type="submit" id="code" value="Submit" class="btn btn-primary btn-lg right">
             <input type="submit" formaction="/api/quit" method="POST" value="Finish" class="btn btn-primary btn-lg btn-danger">

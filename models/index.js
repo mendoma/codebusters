@@ -1,16 +1,16 @@
 const Sequelize = require('sequelize'),
-    config = require('../config/keys'),
-    UserModel = require('./user'),
-    GameModel = require('./game'),
-    AnswerModel = require('./answers')
+	config = require('../config/keys'),
+	UserModel = require('./user'),
+	GameModel = require('./game'),
+	AnswerModel = require('./answers')
 
 if (process.env.JAWSDB_URL) {
-    var sequelize = new Sequelize(process.env.JAWSDB_URL)
+	var sequelize = new Sequelize(process.env.JAWSDB_URL)
 } else {
-    var sequelize = new Sequelize(config.db_name, config.db_user, config.db_password, {
-        host: config.db_host,
-        dialect: 'mysql'
-    })
+	var sequelize = new Sequelize(config.db_name, config.db_user, config.db_password, {
+		host: config.db_host,
+		dialect: 'mysql'
+	})
 }
 
 const User = UserModel(sequelize, Sequelize)
@@ -23,13 +23,13 @@ Game.hasMany(Answer)
 Answer.belongsTo(Game)
 
 sequelize
-    .sync()
-    .then(() => {
-        console.log('Database & tables created')
-    })
+	.sync()
+	.then(() => {
+		console.log('Database & tables created')
+	})
 
 module.exports = {
-    User,
-    Game,
-    Answer
+	User,
+	Game,
+	Answer
 }

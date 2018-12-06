@@ -11,13 +11,13 @@ body {
 
 .footer {
     margin-top: 20px;
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     text-align: center;
     color: red;
 }
 
 #home {
-    background-image: url("img2.jpg");
+    background-image: url("/images/bg_1.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -91,10 +91,6 @@ body {
     text-align: center;
     color: black
 }
-/* 
-.btn-primary {
-    margin-top: 50px;
-} */
 
 .btn {
     margin: 10px 5px 10px 5px;
@@ -111,4 +107,22 @@ a:hover {
 
 #loggedIn {
     cursor: auto;
+}
+
+.text-center {
+    font-size: 1.5;
+}
+
+tbody {
+    counter-reset: rowNumber;
+}
+
+tbody tr {
+    counter-increment: rowNumber;
+}
+
+tbody tr td:first-child::before {
+    content: counter(rowNumber);
+    min-width: 1em;
+    margin-right: 0.5em;
 }

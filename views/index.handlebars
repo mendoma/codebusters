@@ -20,9 +20,12 @@
     </div>
 
     {{!-- Leaderboard Container--}}
-    <div class="container panel">
+    <div class="container panel table-responsive">
         <table class="table table-bordered">
             <thead>
+                <tr>
+                    <th scope="col" colspan="3" class="text-center">Leaderboard</th>
+                </tr>
                 <tr>
                     <th scope="col">Ranking #</th>
                     <th scope="col">Player Name</th>
@@ -30,12 +33,14 @@
                 </tr>
             </thead>
             <tbody>
+                {{#each game}}
                 <tr>
-                    <th>{{id}}</th>
+                    <td></td>
                     <td>{{user.fullname}}</td>
-                    <td>{{user.score}}</td>
+                    <td>{{total_score}}</td>
                 </tr>
+                {{/each}}
             </tbody>
         </table>
-    </div>
+        </div>
 </body>
