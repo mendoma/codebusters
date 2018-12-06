@@ -14,6 +14,8 @@ const express = require('express'),
 const app = express()
 app.use(favicon(path.join(__dirname, '/public/images/favicon.ico')))
 
+var io = require('socket.io')(server);
+
 // Port to listen on
 const PORT = process.env.PORT || 8080
 
