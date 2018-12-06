@@ -124,7 +124,7 @@ router.post('/api/:gameId/challenge4', (req, res) => {
 
 router.post('/api/:gameId/challenge5', (req, res) => {
    const input = req.body.code
-   const oddNum = code.oddNum()
+   const oddNum = code.oddNum(5)
    let result = vm.runInNewContext(input)
    let compare = result === oddNum
    if (compare) {
@@ -152,7 +152,7 @@ router.post('/api/:gameId/challenge5', (req, res) => {
 
 router.post('/api/:gameId/challenge6', (req, res) => {
    const input = req.body.code
-   const primeCheck = code.primeCheck()
+   const primeCheck = code.primeCheck([1,2,9,17])
    let result = vm.runInNewContext(input)
    let compare = result === primeCheck
    if (compare) {
