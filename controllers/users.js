@@ -50,7 +50,7 @@ router.post('/users/register', (req, res) => {
 			}
 			req.login(req.body.id, err => {
 				if (err) {
-					req.flash('success', 'Welcome ' + req.body.fullname + '. You have successfully created your account.')
+					req.flash('success', 'Welcome ' + req.body.fullname + '. You have successfully created your account. Please login!')
 				} else {
 					req.flash('success', 'Please login')
 				}
