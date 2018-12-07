@@ -14,7 +14,7 @@ const express = require('express'),
 const app = express()
 app.use(favicon(path.join(__dirname, '/public/images/favicon.ico')))
 
-var io = require('socket.io')(server);
+var io = require('socket.io')(socketserver);
 
 // Port to listen on
 const PORT = process.env.PORT || 8080
@@ -67,12 +67,12 @@ app.listen(PORT, () => {
 })
 
 //=====================p5js==================
-var server = app.listen(process.env.PORT || 3000, listen);
+var socketserver = app.listen(process.env.PORT || 3000, listen);
 
 // This call back just tells us that the server has started
 function listen() {
- var host = server.address().address;
- var port = server.address().port;
+ var host = socketserver.address().address;
+ var port = socketserver.address().port;
  console.log('Example app listening at http://' + host + ':' + port);
 }
 
@@ -81,7 +81,7 @@ app.use(express.static('public'));
 
 // WebSocket Portion
 // WebSockets work with the HTTP server
-var io = require('socket.io')(server);
+var io = require('socket.io')(socketserver);
 
 // Register a callback function to run when we have an individual connection
 // This is run for each individual user that connects
