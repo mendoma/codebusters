@@ -1,5 +1,4 @@
-<body class="chall">
-
+{{!-- <div class="challenge">
     <div class="jumbotron container panel">
         <div class="container">
             <div class="typewriter">
@@ -10,7 +9,6 @@
     </div>
 
     <div class="container">
-
         <form action="/api/{{gameId}}/challenge1" method="POST">
             <textarea name="code" id="code-val" cols="100" rows="10" class="form-control form-rounded" minlength="10"></textarea>
             <br />
@@ -18,7 +16,33 @@
             <a href="/challenge/{{gameId}}/challenge2"><button class="btn btn-primary btn-lg">Next Challenge</button></a>
             <input type="submit" formaction="/api/quit" method="POST" value="Done" class="btn btn-primary btn-lg btn-danger">
         </form>
+    </div>
+</div> --}}
+<div class="container index">
+    <div class="card grey darken-2">
+        <div class="card-content">
+            <div class="typewriter">
+                <h1>Codebusters</h1>
+            </div>
+            <h4>Write a function that will return the sum of two numbers equal to 4</h4>
+        </div>
+        <div class="card-content">
+            <div class="row">
+                <form class="col s12">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="textarea1" class="materialize-textarea"></textarea>
+                            <label for="textarea1">Textarea</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <ul class="tabs grey darken-2">
+            <li class="tab disabled"><a href="#">Previous Challenge</a></li>
+            <li class="tab"><a class="active" target="_blank" href="/api/quit">Done</a></li>
+            <li class="tab"><a href="#next">Next Challenge</a></li>
+        </ul>
 
     </div>
-
-</body>
+</div>

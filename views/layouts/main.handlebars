@@ -1,149 +1,128 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-
-    <script type="text/javascript" src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.js"></script>
-   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.dom.js"></script>
-   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.sound.js"></script>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-        crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="/css/materialize.min.css" media="screen,projection" />
+
     <link rel="stylesheet" href="/css/style.css">
     <title>Codebusters</title>
 </head>
 
-{{!--
+<body>
 
-<body id="home"> --}}
-<div class="canvas">
-    {{!-- NavBar --}}
-    <nav class="navbar navbar-inverse">
-        <div class="container">
-            <div class="navbar-header">
-                <a href="/"><button class="btn">Home Page</button></a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="nav navbar-nav navbar-right">
-                    {{!-- Login --}}
-                    <li class="nav-item">
-                        {{#unless currentUser}}
-                        <button type="button" class="btn" data-toggle="modal" data-target="#myModal">
-                            <a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a>
-                        </button>
-                    </li>
-                    {{!-- Sign-Up --}}
-                    <li class="nav-item">
-                        <button type="button" class="btn" data-toggle="modal" data-target="#secModal">
-                            <a href="#"><span class="glyphicon glyphicon-user"></span> Sign-Up</a>
-                        </button>
-                    </li>
-                    {{/unless}}
-                    {{#if currentUser}}
-                    {{!-- Logout --}}
-                    <li class="nav-item">
-                        <button type="button" class="btn">
-                            <a href="/users/logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a>
-                        </button>
-                    </li>
-                    <li class="nav-item">
-                        <button type="button" class="btn" id="loggedIn">
-                            You are logged in as {{currentUser.fullname}}
-                        </button>
-                    </li>
-                    {{/if}}
-                </ul>
-            </div>
-
-            {{!-- Modal Pop-Up for Login Button --}}
-            <div class="modal" id="myModal">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-
-                        <!-- Modal Header for Login Button-->
-                        <div class="modal-header">
-                            <h4 class="modal-title">Login</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-
-                        <!-- Modal body for Login Button -->
-                        <div class="modal-body">
-                            <form action="/users/login" method="POST">
-                                <div class="form-group">
-                                    <label for="username">Username</label>
-                                    <input type="username" class="form-control" id="username" placeholder="Enter your username"
-                                        name="username" minlength="4" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="password">Password</label>
-                                    <input type="password" class="form-control" id="password" placeholder="Enter password"
-                                        name="password" minlength="4" required>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Login</button>
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {{!-- Modal Pop-Up for Sign-Up Button --}}
-            <div class="modal" id="secModal">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-
-                        <!-- Modal Header for Sign-Up Button-->
-                        <div class="modal-header">
-                            <h4 class="modal-title">Sign-Up</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-
-                        <!-- Modal body for Sign-Up Button -->
-                        <div class="modal-body">
-                            <form action="/users/register" method="POST">
-                                <div class="form-group">
-                                    <label for="fullname">Full Name</label>
-                                    <input type="fullname" class="form-control" placeholder="Enter your full name" name="fullname" minlength="4" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="username">Username</label>
-                                    <input type="username" class="form-control" placeholder="Enter player name" name="username" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="password">Password</label>
-                                    <input type="password" class="form-control" placeholder="Enter password" name="password"
-                                        minlength="4" required>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <nav class="grey darken-2">
+        <div class="nav-wrapper container">
+            <a href="/" class="brand-logo waves-effect">Home</a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+                {{#unless currentUser}}
+                <li><a class="waves-effect modal-trigger" href="#signupModal">Sign Up</a></li>
+                <li><a class="waves-effect modal-trigger" href="#loginModal">Login</a></li>
+                {{/unless}}
+                {{#if currentUser}}
+                <li><a class="waves-effect" href="/users/logout">Logout</a></li>
+                <li>Logged in as {{currentUser.fullname}}</li>
+                {{/if}}
+            </ul>
+        </div>
     </nav>
 
-    {{!-- Flash messages --}}
-    <div class="container">
-        {{#if error}}
-        <div class="alert alert-danger" role="alert">
-            {{error}}
-        </div>
+    <ul class="sidenav" id="mobile-demo">
+        <li><a href="/" class="waves-effect">Home</a></li>
+        {{#unless currentUser}}
+        <li><a class="waves-effect modal-trigger" href="#signupModal">Sign Up</a></li>
+        <li><a class="waves-effect modal-trigger" href="#loginModal">Login</a></li>
+        {{/unless}}
+        {{#if currentUser}}
+        <li><a class="waves-effect" href="/users/logout">Logout</a></li>
+        <li>Logged in as {{currentUser.fullname}}</li>
         {{/if}}
-        {{#if success}}
-        <div class="alert alert-success" role="alert">
-            {{success}}
+    </ul>
+
+    <!-- Signup Modal Structure -->
+    <div id="signupModal" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h4 class="center">Sign Up To Start Coding</h4>
+            <h6 class="center">Your information will be shared with anyone</h6>
+            <br>
+            <div class="row">
+                <form action="/users/register" method="POST" class="col s12">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input id="icon_prefix" name="fullname" type="text" class="validate">
+                            <label for="icon_prefix">Fullname</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input id="icon_prefix" name="username" type="text" class="validate">
+                            <label for="icon_prefix">Username</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">phone</i>
+                            <input id="icon_telephone" name="password" type="password" class="validate">
+                            <label for="icon_telephone">Password</label>
+                        </div>
+                    </div>
+                    <input type="button" class="btn waves-effect modal-close right" value="Close">
+                    <input type="submit" class="btn waves-effect right" id="signup" value="Sign Up">
+                </form>
+            </div>
         </div>
-        {{/if}}
+    </div>
+
+    <!-- Login Modal Structure -->
+    <div id="loginModal" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h4 class="center">Login</h4>
+            <h6 class="center">Secure Connection</h6>
+            <br>
+            <div class="row">
+                <form action="/users/login" method="POST" class="col s12">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input id="icon_prefix" name="username" type="text" class="validate">
+                            <label for="icon_prefix">Username</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">phone</i>
+                            <input id="icon_telephone" name="password" type="password" class="validate">
+                            <label for="icon_telephone">Password</label>
+                        </div>
+                    </div>
+                    <input type="button" class="btn waves-effect modal-close right" value="Close">
+                    <input type="submit" class="btn waves-effect right" id="signup" value="Login">
+                </form>
+            </div>
+        </div>
     </div>
 
     <div class="content">
+
+        {{!-- Flash messages --}}
+        <div class="container">
+            {{#if error}}
+            <div class="alert alert-danger" role="alert">
+                {{error}}
+            </div>
+            {{/if}}
+            {{#if success}}
+            <div class="alert alert-success" role="alert">
+                {{success}}
+            </div>
+            {{/if}}
+        </div>
 
         {{{body}}}
 
@@ -152,7 +131,7 @@
     <div class="footer">
         © Copyright 2018 Codebusters
     </div>
-</div>
+    <script type="text/javascript" src="/javascripts/materialize.min.js"></script>
     <script src="/javascripts/main.js"></script>
 </body>
 
