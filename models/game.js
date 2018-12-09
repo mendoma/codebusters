@@ -5,6 +5,10 @@ module.exports = (sequelize, DataType) => {
 		},
 		total_time: {
 			type: DataType.TIME
+		},
+		active: {
+			type: DataType.BOOLEAN,
+			default: false
 		}
 	})
 }

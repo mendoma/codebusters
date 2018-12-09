@@ -1,32 +1,20 @@
-{{!-- <div class="container">
-    <div class="typewriter">
-        <h1>Codebusters</h1>
-    </div>
-    <h3>Test your skills by completing the next coding coding challenges. You will earn points for all correct
-        answers. Move up the rankings as you compete with other web developers. Good luck!
-    </h3>
-    {{#if currentUser}}
-    <a class="btn btn-primary btn-lg" href="/users/code">Start Coding Challenge</a>
-    {{/if}}
-    {{#unless currentUser}}
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-        Start Coding Challenge
-    </button>
-    {{/unless}}
-</div> --}}
-
 <div class="container index">
     <div class="col m12">
         <div class="card grey darken-2">
             <div class="card-content white-text">
-                <div class="typewriter">
-                    <h1>Codebusters</h1>
-                </div>
-                <h4>
+                <h1 class="typewriter">Codebusters</h1>
+                <h5>
                     Test your skills by completing the next coding coding challenges. You will earn points for all
                     correct answers. Move up the rankings as you compete with other web developers. Good luck!
-                </h4>
-                <a class="waves-effect btn modal-trigger black-text" href="#loginModal">Start Coding Challenge</a>
+                </h5>
+                <div class="start center">
+                {{#unless currentUser}}
+                <a class="waves-effect btn modal-trigger black-text hoverable" href="#loginModal">Start Coding Challenge</a>
+                {{/unless}}
+                {{#if currentUser}}
+                <a class="waves-effect btn black-text hoverable" href="/users/code">Start Coding Challenge</a>
+                {{/if}}
+                </div>
             </div>
         </div>
     </div>

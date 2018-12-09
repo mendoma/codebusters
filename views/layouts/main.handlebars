@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="/css/materialize.min.css" media="screen,projection" />
-
     <link rel="stylesheet" href="/css/style.css">
     <title>Codebusters</title>
 </head>
@@ -16,16 +15,24 @@
 
     <nav class="grey darken-2">
         <div class="nav-wrapper container">
-            <a href="/" class="brand-logo waves-effect">Home</a>
+            <div class="brand-logo center hide-on-large-only">Codebusters</div>
+            <a href="/" class="waves-effect btn hoverable black-text hide-on-med-and-down">Home</a>
+            {{!-- Flash messages --}}
+            {{#if error}}
+            <a class="brand-logo center red-text" id="error">{{error}}</a>
+            {{/if}}
+            {{#if success}}
+            <a class="brand-logo center teal-text" id="success">{{success}}</a>
+            {{/if}}
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
                 {{#unless currentUser}}
-                <li><a class="waves-effect modal-trigger" href="#signupModal">Sign Up</a></li>
-                <li><a class="waves-effect modal-trigger" href="#loginModal">Login</a></li>
+                <li><a class="waves-effect modal-trigger btn hoverable black-text" href="#signupModal">Sign Up</a></li>
+                <li><a class="waves-effect modal-trigger btn hoverable black-text" href="#loginModal">Login</a></li>
                 {{/unless}}
                 {{#if currentUser}}
-                <li><a class="waves-effect" href="/users/logout">Logout</a></li>
-                <li>Logged in as {{currentUser.fullname}}</li>
+                <li><a class="waves-effect btn hoverable black-text" href="/users/logout">Logout</a></li>
+                <li><a class="teal-text">Logged in as {{currentUser.fullname}}</a></li>
                 {{/if}}
             </ul>
         </div>
@@ -39,12 +46,12 @@
         {{/unless}}
         {{#if currentUser}}
         <li><a class="waves-effect" href="/users/logout">Logout</a></li>
-        <li>Logged in as {{currentUser.fullname}}</li>
+        <li><a class="waves-effect">Logged in as {{currentUser.fullname}}</a></li>
         {{/if}}
     </ul>
 
     <!-- Signup Modal Structure -->
-    <div id="signupModal" class="modal modal-fixed-footer">
+    <div id="signupModal" class="modal">
         <div class="modal-content">
             <h4 class="center">Sign Up To Start Coding</h4>
             <h6 class="center">Your information will be shared with anyone</h6>
@@ -53,34 +60,34 @@
                 <form action="/users/register" method="POST" class="col s12">
                     <div class="row">
                         <div class="input-field col s12">
-                            <i class="material-icons prefix">account_circle</i>
-                            <input id="icon_prefix" name="fullname" type="text" class="validate">
-                            <label for="icon_prefix">Fullname</label>
+                            <i class="material-icons prefix">face</i>
+                            <input name="fullname" type="text" class="validate">
+                            <label for="fullname">Fullname</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
                             <i class="material-icons prefix">account_circle</i>
-                            <input id="icon_prefix" name="username" type="text" class="validate">
-                            <label for="icon_prefix">Username</label>
+                            <input name="username" type="text" class="validate">
+                            <label for="username">Username</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            <i class="material-icons prefix">phone</i>
+                            <i class="material-icons prefix">vpn_key</i>
                             <input id="icon_telephone" name="password" type="password" class="validate">
-                            <label for="icon_telephone">Password</label>
+                            <label for="password">Password</label>
                         </div>
                     </div>
                     <input type="button" class="btn waves-effect modal-close right" value="Close">
-                    <input type="submit" class="btn waves-effect right" id="signup" value="Sign Up">
+                    <input type="submit" class="btn waves-effect right" value="Sign Up">
                 </form>
             </div>
         </div>
     </div>
 
     <!-- Login Modal Structure -->
-    <div id="loginModal" class="modal modal-fixed-footer">
+    <div id="loginModal" class="modal">
         <div class="modal-content">
             <h4 class="center">Login</h4>
             <h6 class="center">Secure Connection</h6>
@@ -90,39 +97,25 @@
                     <div class="row">
                         <div class="input-field col s12">
                             <i class="material-icons prefix">account_circle</i>
-                            <input id="icon_prefix" name="username" type="text" class="validate">
-                            <label for="icon_prefix">Username</label>
+                            <input name="username" type="text" class="validate">
+                            <label for="username">Username</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            <i class="material-icons prefix">phone</i>
-                            <input id="icon_telephone" name="password" type="password" class="validate">
-                            <label for="icon_telephone">Password</label>
+                            <i class="material-icons prefix">vpn_key</i>
+                            <input name="password" type="password" class="validate">
+                            <label for="password">Password</label>
                         </div>
                     </div>
                     <input type="button" class="btn waves-effect modal-close right" value="Close">
-                    <input type="submit" class="btn waves-effect right" id="signup" value="Login">
+                    <input type="submit" class="btn waves-effect right" value="Login">
                 </form>
             </div>
         </div>
     </div>
 
     <div class="content">
-
-        {{!-- Flash messages --}}
-        <div class="container">
-            {{#if error}}
-            <div class="alert alert-danger" role="alert">
-                {{error}}
-            </div>
-            {{/if}}
-            {{#if success}}
-            <div class="alert alert-success" role="alert">
-                {{success}}
-            </div>
-            {{/if}}
-        </div>
 
         {{{body}}}
 

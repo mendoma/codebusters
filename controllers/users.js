@@ -50,7 +50,7 @@ router.post('/users/register', (req, res) => {
 			}
 			req.login(req.body.id, err => {
 				if (err) {
-					req.flash('success', 'Welcome ' + req.body.fullname + '. You have successfully created your account. Please login!')
+					req.flash('success', 'Accounted created successfully. Please login!')
 				} else {
 					req.flash('success', 'Please login')
 				}
@@ -87,7 +87,7 @@ router.post('/users/login', (req, res, next) => {
 })
 
 router.get('/users/code', (req, res, next) => {
-	return res.redirect('/challenge/' + gameId + '/challenge1')
+	return res.redirect('/game/' + gameId + '/challenge/1')
 })
 
 // Logout session
