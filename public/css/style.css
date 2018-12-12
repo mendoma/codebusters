@@ -21,16 +21,31 @@ nav {
     flex: 1 0 auto;
 }
 
+.container.row {
+    opacity: .92;
+}
+
+.card.grey.darken-2.z-depth-5 {
+    opacity: 0.92;
+    min-height: 400px;
+}
+
+h2.center {
+    padding-top: 20px;
+}
+
 .typewriter {
     font-family: Lucida Sans Typewriter, Lucida Console, monaco, Bitstream Vera Sans Mono, monospace !important;
     overflow: hidden;
+    white-space: nowrap;
+    margin: 0 auto;
     border-right: .15em solid black;
     animation:
         typing 3.5s steps(40, end),
         blink-caret .75s step-end infinite;
-    color: #f44336;
+    color: teal;
+    font-weight: 800;
     text-align: center;
-    font-weight: 900;
 }
 
 @keyframes typing {
@@ -49,8 +64,8 @@ nav {
         border-color: transparent
     }
 
-    50% {
-        border-color: #f44336;
+    40% {
+        border-color: teal;
     }
 }
 
@@ -59,10 +74,6 @@ nav {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-}
-
-.container.index {
-    opacity: 0.90;
 }
 
 .text-center {
@@ -81,6 +92,10 @@ tbody tr td:first-child::before {
     content: counter(rowNumber);
     min-width: 1em;
     margin-right: 0.5em;
+}
+
+.card, .modal-content {
+    border-radius: 5px;
 }
 
 .footer {

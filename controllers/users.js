@@ -43,29 +43,29 @@ router.post('/users/register', (req, res) => {
 					username: data.username,
 					password: data.password
 				})
-					.then(res => {
-						if (!res) return req.flash('Failed to create account')
-						return res
+					.then(user => {
+						if (!user) return req.flash('Failed to create account')
+						req.login(user, err => {
+							if (err) {
+								req.flash('error', err)
+								res.redirect('/')
+
+							} else {
+								req.flash('success', 'Accounted created successfully.')
+								res.redirect('/')
+							}
+						})
 					})
 			}
-			req.login(req.body.id, err => {
-				if (err) {
-					req.flash('success', 'Accounted created successfully. Please login!')
-				} else {
-					req.flash('success', 'Please login')
-				}
-			})
-			res.redirect('/')
 		})
 		.catch(err => {
 			req.flash('error', err)
 		})
 })
 
+// POST login
 router.post('/users/login', (req, res, next) => {
 	passport.authenticate('login', (err, user, info) => {
-		console.log('login', err)
-		console.log('logininfo', info)
 		if (err) {
 			req.flash('error', err)
 			res.redirect('/')
@@ -81,12 +81,12 @@ router.post('/users/login', (req, res, next) => {
 				return res.redirect('/')
 			}
 			req.flash('success', 'Welcome ' + user.fullname)
-			return res.redirect('/challenge/' + gameId + '/challenge1')
+			return res.redirect('/')
 		})
 	})(req, res, next)
 })
 
-router.get('/users/code', (req, res, next) => {
+router.get('/users/code', middleware.createGame, (req, res, next) => {
 	return res.redirect('/game/' + gameId + '/challenge/1')
 })
 

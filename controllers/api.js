@@ -5,36 +5,79 @@ const express = require('express'),
 
 const router = express.Router()
 
-// Test code
-router.post('/api/:gameId/challenge1', (req, res) => {
-	// const user_id = req.user.dataValues.id
+// Game code
+router.post('/api/:gameId/challenge/:id', (req, res, next) => {
+
+	const currentId = parseInt(req.params.id - 1)
+
+	const challenge = code.filter(obj => {
+		// console.log(obj, req.params.id)
+		if (obj.id === parseInt(currentId)) {
+			return obj
+		}
+	})
+
+	console.log('challenge', challenge)
+	console.log('request params', (req.params.id - 1))
+
+	const gameId = req.params.gameId
 	const input = req.body.code
-	const addAnswer = code.addNumbers(2, 2)
-	let result = vm.runInNewContext(input)
-	let compare = result === addAnswer
-	console.log('correct:', compare)
-	// console.log('reqeust:', res)
-	if (compare) {
-		Answer.create({
-			score: 5,
-			code: input,
-			gameId: req.params.gameId
+	const answer = challenge[0].answer
+	const result = vm.runInNewContext(input)
+	const compare = result === answer
+
+	console.log(result)
+
+	if (req.params.id === 'finish') {
+		if (compare) {
+			Answer.create({
+				score: 5,
+				code: input,
+				gameId: gameId
+			})
+		} else {
+			Answer.create({
+				score: 0,
+				code: input,
+				gameId: gameId
+			})
+		}
+		Answer.findAll({
+			where: { gameId: gameId },
+			include: [
+				Game
+			]
 		})
-			.then(update => {
-				console.log('update', update.dataValues)
+			.then(result => {
+				console.log(result)
+				const game = result[0].dataValues.gameId
+				const points = result.map(points => points.dataValues.score)
+					.reduce((a, b) => a + b, 0)
 				Game.update({
-					total_score: update.dataValues.score
-				}, { where: { id: req.params.gameId }})
+					total_score: points,
+				}, { where: { id: game }})
+				req.flash('success', `Thank you for playing ${req.user.fullname}`)
+				return res.redirect('/')
 			})
 	} else {
-		Answer.create({
-			score: 0,
-			code: input,
-			gameId: req.params.gameId
-		})
+		if (compare) {
+			Answer.create({
+				score: 5,
+				code: input,
+				gameId: req.params.gameId
+			})
+			req.flash('success', 'Answer submitted')
+			res.redirect('/game/' + req.params.gameId + '/challenge/' + req.params.id)
+		} else {
+			Answer.create({
+				score: 0,
+				code: input,
+				gameId: req.params.gameId
+			})
+			req.flash('success', 'Answer submitted')
+			res.redirect('/game/' + req.params.gameId + '/challenge/' + req.params.id)
+		}
 	}
-	req.flash('success', 'Answer submitted')
-	res.redirect('/challenge/' + gameId + '/challenge2')
 })
 
 router.post('/api/:gameId/challenge2', (req, res) => {
@@ -261,7 +304,7 @@ router.post('/api/:gameId/challenge9', (req, res) => {
 	res.redirect('/challenge/' + gameId + '/challenge10')
 })
 
-router.post('/api/:gameId/challenge10', (req, res) => {
+router.post('/api/:gameId/challenge/:finish', (req, res) => {
 	const input = req.body.code
 	const lucky_sevens = code.lucky_sevens([2,1,5,1,0])
 	let result = vm.runInNewContext(input)

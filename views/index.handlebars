@@ -1,44 +1,51 @@
 <div class="container index">
     <div class="col m12">
-        <div class="card grey darken-2">
+        <div class="card grey darken-2 z-depth-5">
             <div class="card-content white-text">
-                <h1 class="typewriter">Codebusters</h1>
-                <h5>
-                    Test your skills by completing the next coding coding challenges. You will earn points for all
-                    correct answers. Move up the rankings as you compete with other web developers. Good luck!
+                <h1 class="typewriter teal-text">Codebusters</h1>
+                <br>
+                <h5 class="center">
+                    Test your skills by completing the next coding coding challenges. You will earn points for all correct answers. Move up the rankings as you compete with other web developers. Good luck!
                 </h5>
+                <br>
+                <br>
+                <br>
                 <div class="start center">
-                {{#unless currentUser}}
-                <a class="waves-effect btn modal-trigger black-text hoverable" href="#loginModal">Start Coding Challenge</a>
-                {{/unless}}
-                {{#if currentUser}}
-                <a class="waves-effect btn black-text hoverable" href="/users/code">Start Coding Challenge</a>
-                {{/if}}
+                    {{#unless currentUser}}
+                    <a class="waves-effect btn modal-trigger black-text hoverable" href="#loginModal">Start Coding
+                        Challenge</a>
+                    {{/unless}}
+                    {{#if currentUser}}
+                    <a class="waves-effect btn black-text hoverable" href="/users/code">Start Coding Challenge</a>
+                    {{/if}}
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-{{!-- Leaderboard Container--}}
-<table class="container highlight responsive-table">
-    <thead>
-        <tr>
-            <th scope="col" colspan="3" class="center-align">Leaderboard</th>
-        </tr>
-        <tr>
-            <th>Ranking #</th>
-            <th>Player Name</th>
-            <th>Score</th>
-        </tr>
-    </thead>
-    <tbody>
-        {{#each game}}
-        <tr>
-            <td></td>
-            <td>{{user.fullname}}</td>
-            <td>{{total_score}}</td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
+<div class="row container">
+    <div class="col s12">
+        <div class="card teal z-depth-5">
+            <h2 class="center">Leaderboard</h2>
+            <table class="container highlight responsive-table">
+                <thead>
+                    <tr>
+                        <th>Ranking #</th>
+                        <th>Player Name</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each game}}
+                    <tr>
+                        <td></td>
+                        <td>{{user.fullname}}</td>
+                        <td>{{total_score}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

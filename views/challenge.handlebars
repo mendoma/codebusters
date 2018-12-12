@@ -1,28 +1,31 @@
 <body class="challenges">
-    <div class="container index">
-        <div class="row">
-            <div class="col s12">
-                <div class="card grey darken-2">
-                    <div class="card-content white-text">
-                        <div class="typewriter">
-                            <h1>Codebusters</h1>
-                        </div>
-                        <h6>{{data.question}}</h6>
-                        <div class="row">
-                            <form class="col s12">
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <i class="material-icons prefix">mode_edit</i>
-                                        <textarea id="code" class="materialize-textarea"></textarea>
-                                        <label for="code">Enter code here...</label>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+    <div class="container index z-depth-5">
+        <div class="col m12">
+            <div class="card grey darken-2 z-depth-5">
+                <div class="card-content white-text">
+                    <div class="section">
+                        <h1 class="typewriter teal-text">Challenge {{data.id}}</h1>
                     </div>
-                    <div class="card-action">
-                        <button class="waves-effect btn black-text hoverable" href="#">Submit</button>
-                        <a href="/game/{{gameId}}/challenge/{{data.next}}" class="waves-effect btn right black-text hoverable">Skip</a>
+                    <br>
+                    <div class="section center">
+                        <h6>{{data.question}}</h6>
+                    </div>
+                    <br>
+                    <div class="section">
+                        <form action="/api/{{gameId}}/challenge/{{data.next}}" method="POST">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <i class="material-icons prefix">create</i>
+                                    <textarea name="code" id="code-val" class="materialize-textarea"></textarea>
+                                    <label for="code-val"> Enter code here...</label>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                            <input type="submit" id="code" class="waves-effect btn hoverable right" value="Submit">
+                            <a href="/game/{{gameId}}/challenge/{{data.previous}}" class="waves-effect btn black-text hoverable">Previous</a>
+                            <a href="/game/{{gameId}}/challenge/{{data.next}}" class="waves-effect btn black-text hoverable">Skip</a>
+                        </form>
                     </div>
                 </div>
             </div>

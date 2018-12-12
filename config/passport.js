@@ -33,18 +33,18 @@ passport.use('login', new LocalStrategy(
 						if (!auth) {
 							return done(null, false)
 						}
-						Game.create({ userId: user.id })
-							.then(result => {
-								console.log('in passport', result.user)
-								if (!result) {
-									req.flash('Game could not be created.')
-									return done(null, false)
-								}
-								gameId = result.dataValues.id
-								console.log('game id', gameId)
-								return done(null, user, gameId)
+						// Game.create({ userId: user.id, active: true })
+						// 	.then(result => {
+						// 		console.log('in passport', result.user)
+						// 		if (!result) {
+						// 			req.flash('Game could not be created.')
+						// 			return done(null, false)
+						// 		}
+						// 		gameId = result.dataValues.id
+						// 		console.log('game id', gameId)
+								return done(null, user)
 							})
 					})
 			})
-	}
-))
+	// }
+)
