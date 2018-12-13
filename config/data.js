@@ -57,6 +57,6 @@ module.exports = [
 		id: 10,
 		question: 'Write a function which takes an array of integers and returns true if any three consecutive elements sum to 7. e.g. [2, 1, 5, 1, 0]',
 		previous: 9,
-		next: 'finish'
+		next: '11'
 	}
 ]

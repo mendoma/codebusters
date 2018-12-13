@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,9 +9,7 @@
     <link rel="stylesheet" href="/css/style.css">
     <title>Codebusters</title>
 </head>
-
 <body>
-
     <nav class="grey darken-2 z-depth-5">
         <div class="nav-wrapper container">
             <div class="brand-logo center hide-on-large-only">Codebusters</div>
@@ -30,12 +27,13 @@
                 <li><a class="waves-effect modal-trigger btn hoverable black-text" href="#loginModal">Login</a></li>
                 {{/unless}}
                 {{#if currentUser}}
-                {{!-- <li><a class="teal-text">Logged in as {{currentUser.fullname}}</a></li> --}}
                 <li><a class="waves-effect btn hoverable black-text" href="/users/logout">Logout</a></li>
                 {{/if}}
             </ul>
         </div>
-        <a class="teal-text right">Logged in as {{currentUser.fullname}}</a>
+        {{#if currentUser}}
+        <a id="user" class="teal-text hide-on-med-and-down">Logged in as {{currentUser.fullname}}</a>
+        {{/if}}
     </nav>
 
     {{!-- Sidenav --}}
@@ -128,5 +126,4 @@
     <script type="text/javascript" src="/javascripts/materialize.min.js"></script>
     <script src="/javascripts/main.js"></script>
 </body>
-
 </html>

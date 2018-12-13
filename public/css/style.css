@@ -13,8 +13,16 @@ nav {
     margin-bottom: 25px;
 }
 
+#user {
+    position: absolute;
+    top: 0em;
+    right: 1em;
+    font-weight: 600;
+}
+
 #error, #success {
     font-size: 1.2em;
+    font-weight: 600;
 }
 
 .content {
