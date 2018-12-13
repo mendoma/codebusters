@@ -30,7 +30,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(session({
 	secret: process.env.secret,
-	maxAge: 6000,
+	maxAge: 1800,
 	resave: false,
 	saveUninitialized: false,
 }))
