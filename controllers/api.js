@@ -1,6 +1,7 @@
 const express = require('express'),
+	{ VM } = require('vm2'),
+	vm = new VM(),
 	code = require('../code/code'),
-	vm = require('vm'),
 	{ User, Game, Answer } = require('../models/index')
 
 const router = express.Router()
@@ -8,6 +9,7 @@ const router = express.Router()
 // Game code
 router.post('/api/:gameId/challenge/:id', (req, res, next) => {
 	const currentId = parseInt(req.params.id - 1)
+	const gameId = req.params.gameId
 
 	const challenge = code.filter(obj => {
 		if (obj.id === parseInt(currentId)) {
@@ -15,13 +17,15 @@ router.post('/api/:gameId/challenge/:id', (req, res, next) => {
 		}
 	})
 
-	const gameId = req.params.gameId
-	const input = req.body.code
-	const answer = challenge[0].code()
-	const result = vm.runInNewContext(input)
-	const compare = result === answer
-
-	console.log(answer)
+	try {
+		var input = req.body.code
+		var answer = challenge[0].code()
+		var result = vm.run(input)
+		var compare = result === answer
+		console.log('new result', result)
+	} catch (err) {
+		console.log('Failed to execute script.', err)
+	}
 
 	if (currentId === 10) {
 		if (compare) {
@@ -30,7 +34,8 @@ router.post('/api/:gameId/challenge/:id', (req, res, next) => {
 				code: input,
 				gameId: gameId
 			})
-		} else {
+		}
+		if (!compare) {
 			Answer.create({
 				score: 0,
 				code: input,
@@ -53,23 +58,28 @@ router.post('/api/:gameId/challenge/:id', (req, res, next) => {
 				req.flash('success', `Thank you for playing ${req.user.fullname}`)
 				return res.redirect('/')
 			})
-	} else {
+	}
+	
+	if (currentId !== 10) {
 		if (compare) {
 			Answer.create({
 				score: 5,
 				code: input,
 				gameId: req.params.gameId
 			})
-			req.flash('success', 'Answer submitted correctly? ' + compare)
-			res.redirect('/game/' + req.params.gameId + '/challenge/' + req.params.id)
-		} else {
+			if (compare) req.flash('success', 'Answer submitted correctly')
+			if (!compare) req.flash('error', 'Answer submitted incorrectly')
+			return res.redirect('/game/' + req.params.gameId + '/challenge/' + req.params.id)
+		}
+		if (!compare) {
 			Answer.create({
 				score: 0,
 				code: input,
 				gameId: req.params.gameId
 			})
-			req.flash('success', 'Answer submitted correctly? ' + compare)
-			res.redirect('/game/' + req.params.gameId + '/challenge/' + req.params.id)
+			if (compare) req.flash('success', 'Answer submitted correctly')
+			if (!compare) req.flash('error', 'Answer submitted incorrectly')
+			return res.redirect('/game/' + req.params.gameId + '/challenge/' + req.params.id)
 		}
 	}
 })
